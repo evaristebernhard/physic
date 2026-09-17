@@ -4,7 +4,7 @@ This appendix records the points at which a formal Euler--Lagrange calculation c
 
 \subsection{Enlarging the HPS admissible class}
 
-The HPS definition uses radial probability measures belonging to $H^{-1}(\R^3)$ and with finite second moment.  For the lower bound we enlarged the class after radial reduction.  This is harmless because the lower bound is proved for the larger class, while the explicit optimizer \eqref{eq:rho-star} is an $H^{-1}$ probability density with compact support bounded away from the origin.  Hence the lower and upper bounds meet inside the original HPS class.
+The HPS definition uses radial probability measures belonging to $H^{-1}(\R^3)$ and with finite second moment.  For the lower bound we enlarged the class after radial reduction.  This is harmless because the lower bound is proved for the larger class, while the explicit optimizer \eqref{eq:rho-star} is an $H^{-1}$ probability density with compact support bounded away from the origin.  Hence the lower and upper bounds meet inside the original HPS class.  HPS radial reduction identifies the value of the full variational infimum with the radial infimum; the uniqueness argument in the present manuscript, however, is only a uniqueness statement inside the radial class.
 
 \subsection{Existence and loss of exponential moments}
 
@@ -12,7 +12,7 @@ Weak compactness alone does not preserve the constraints
 \[
  A[\sigma]=B[\sigma]=1,
 \]
-because exponentially small masses can escape to large $|t|$ while carrying a nonvanishing exponential moment.  The proof of \Cref{lem:existence} therefore uses more than tightness.  If a weak limit has $A B<1$, amplitude and translation normalization multiplies $J$ by $(AB)^{-1}>1$, contradicting the definition of the supremum.  This closes the only possible moment--loss mechanism.
+because exponentially small masses can escape to large $|t|$ while carrying a nonvanishing exponential moment.  The proof of \Cref{lem:existence} therefore uses more than tightness.  First, a normalized two--point measure gives an explicit competitor with $J>0$, so the supremum $M$ is strictly positive.  Tightness and bounded total mass yield narrow convergence along a maximizing subsequence, and the corresponding product measures converge narrowly as well; because $k(t-u)$ is bounded and continuous, this gives $J[\sigma_n]\to J[\sigma]=M$.  If the weak limit had $A B<1$, amplitude and translation normalization would multiply $J$ by $(AB)^{-1}>1$, producing a normalized competitor with value larger than $M$.  This closes the only possible exponential-moment loss mechanism.
 
 \subsection{The obstacle condition without an abstract KKT theorem}
 
@@ -38,15 +38,24 @@ For a finite signed measure $\eta$ satisfying the two moment constraints, the fu
 \[
  p(t)=\int\ee^{|t-u|}\dd\eta(u)
 \]
-is compactly supported in the same interval and belongs to $H_0^1$.  Distributionally,
+vanishes outside the candidate interval and belongs to $H_0^1$.  Distributionally,
 \[
- (\partial_t^2-1)p=2\eta.
+ (\partial_t^2-1)p=2\eta,
 \]
-For smooth compactly supported approximations preserving the two moments, Plancherel gives \eqref{eq:Jeta-identity}.  The identity extends to finite signed measures by approximation because $k$ is bounded and continuous, while the right side is continuous in the induced $H^1$ topology for $p$.  Equivalently, one may regard \eqref{eq:Jeta-identity} as a quadratic-form identity associated with the Fourier multiplier
+so in particular $\eta\in H^{-1}(\R)$.  Fourier transformation gives
 \[
- \widehat{k}(\xi)=\frac{2(2-\xi^2)}{(1+\xi^2)(4+\xi^2)}.
+ \widehat\eta(\xi)=-\frac{1+\xi^2}{2}\widehat p(\xi).
 \]
-The strict inequality ultimately uses only
+Combining this identity with
+\[
+ \widehat{k}(\xi)=\frac{2(2-\xi^2)}{(1+\xi^2)(4+\xi^2)}
+\]
+gives the multiplier decomposition
+\[
+ \widehat{k}(\xi)|\widehat\eta(\xi)|^2
+ =\frac12\left(-\xi^2+5-\frac{18}{\xi^2+4}\right)|\widehat p(\xi)|^2,
+\]
+which is exactly \eqref{eq:Jeta-identity}.  The finite-measure pairing can be justified by standard $H^{-1}$ approximation.  Thus the signed-measure step does not rely on a formal Fourier transform of a measure without a function-space interpretation.  The strict inequality ultimately uses only
 \[
  2a_*<\frac{\pi}{\sqrt5}.
 \]
@@ -54,6 +63,10 @@ The strict inequality ultimately uses only
 \subsection{Why the global argument does not assume connected support}
 
 No connectedness assumption on $\supp\sigma$ is made.  We define only its extremal points $a$ and $b$.  Compactness and smooth pasting at these two points yield the endpoint identities and hence $a+b=0$.  If a maximizer had value at least $M_*$, its extremal support points would lie inside $[-a_*,a_*]$, regardless of holes in the support.  The difference measure $\eta=\sigma-\sigma_*$ is therefore supported in the full candidate interval, exactly the hypothesis required in \Cref{lem:conditional-negativity}.
+
+\subsection{Scope of the uniqueness statement}
+
+The proof of \Cref{thm:main} shows that the normalized maximizer of the logarithmic radial problem is unique, and hence that the radial minimizer is unique up to dilation.  HPS radialization at $s=3$ proves equality between the full and radial infima, but the radialization inequality is not used here in a strict form.  Consequently the present note does not claim that every minimizer in the full nonradial HPS admissible class must itself be radial.
 
 \subsection{What is not claimed here}
 

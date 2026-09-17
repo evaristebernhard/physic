@@ -1,0 +1,59 @@
+\section{Introduction}
+
+The excess--charge problem asks how many electrons an atomic nucleus of charge $Z$ can bind.  In the nonrelativistic Schr\"odinger model one expects only a bounded number of excess electrons, independently of $Z$.  A classical theorem of Lieb gives $N_c(Z)<2Z+1$ \cite{Lieb1984}; Nam later improved the coefficient to $1.22$ with an explicit $O(Z^{1/3})$ correction \cite{Nam2012}.  The conjectural bound remains $N_c(Z)\le Z+C$ for a universal constant $C$; see, for example, \cite{Nam2013Review}.
+
+A recent refinement by Hundertmark, Pattakos and Schulz (HPS) develops the weighted multiplier method substantially further and proves
+\[
+ N_c(Z)<1.1185\,Z+O(Z^{1/3}),
+\]
+with an explicit lower--order term \cite{HPS2025}.  A central object in their argument is the mean--field constant
+\begin{equation}\label{eq:def-beta-s}
+ \beta_s:=\inf_{\mu}
+ \frac{\displaystyle
+ \iint_{\R^3\times\R^3}
+ \frac{|x|^s+|y|^s}{2|x-y|}\,\dd\mu(x)\dd\mu(y)}
+ {\displaystyle\int_{\R^3}|x|^{s-1}\,\dd\mu(x)},
+\end{equation}
+where the infimum is taken over the admissible probability measures used in \cite{HPS2025}.  HPS prove that for $1\le s\le3$ the infimum can be restricted to radial measures.  For $s=3$ they then use a pointwise estimate on the radial kernel.  This yields the explicit lower bound
+\[
+ \beta_3\ge 0.8941074569\ldots,
+\]
+whose reciprocal is the source of the leading coefficient $1.1185$ in their final estimate.
+
+The purpose of the present note is to solve the radial variational problem at $s=3$ exactly.
+
+\begin{theorem}[Exact value of $\beta_3$]\label{thm:main}
+Let $\beta_3$ be the HPS mean--field constant defined by \eqref{eq:def-beta-s}.  Set
+\[
+ a_*:=\frac{1}{\sqrt2}\arctan\sqrt2.
+\]
+Then
+\begin{equation}\label{eq:beta-exact}
+ \boxed{\displaystyle
+ \beta_3=\frac{3\ee^{2a_*}}{1+3\ee^{2a_*}}}
+ =0.9205346822904167\ldots .
+\end{equation}
+In particular,
+\[
+ \beta_3^{-1}=1.086325175181735\ldots .
+\]
+A minimizing radial probability measure is supported on the shell
+\[
+ \ee^{-a_*}\le |x|\le \ee^{a_*}
+\]
+and has spatial density proportional to
+\[
+ |x|^{-4}\cos\!\bigl(\sqrt2\log|x|\bigr).
+\]
+Up to the scaling invariance of \eqref{eq:def-beta-s}, this minimizer is unique.
+\end{theorem}
+
+The proof has three main steps.  First, Newton's theorem and the logarithmic change of variables $t=\log r$ transform the radial minimization into a one--dimensional maximization problem for the kernel
+\[
+ k(t)=\ee^{-|t|}-\ee^{-2|t|}.
+\]
+Second, the Euler--Lagrange obstacle condition determines a compactly supported cosine profile.  Third, a conditional negative--definiteness estimate on the extremal support rules out all competing maximizers.  The last step is where the exact solution becomes global rather than merely stationary.
+
+The resulting extremal profile also clarifies a numerical feature already visible in HPS: radial trial densities close to $|x|^{-4}$ are nearly optimal.  In logarithmic radius, the exact extremizer is a compactly supported cosine perturbation of precisely that critical power law.
+
+The paper is organized as follows.  \Cref{sec:radial} records the radial reduction.  \Cref{sec:log} introduces the logarithmic variational problem.  \Cref{sec:extremizer} constructs the candidate maximizer and proves its obstacle condition.  \Cref{sec:global} proves global optimality.  \Cref{sec:atomic} explains how the improved value of $\beta_3$ enters the HPS excess--charge framework.  The appendix isolates the technical points that are most sensitive in a formal proof audit.

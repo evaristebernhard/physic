@@ -1,0 +1,64 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink,capitalize]{cleveref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Pcal}{\mathcal{P}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\betaHPS}{\beta_{3}}
+\newcommand{\kernel}{k}
+
+\title{An Exact Evaluation of a Radial Mean--Field Constant\\in the Atomic Excess--Charge Problem}
+\author{Hu Suiye}
+\date{September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Hundertmark, Pattakos and Schulz introduced a mean--field constant $\beta_s$ in their recent refinement of the excess--charge bound for atoms.  For $1\le s\le 3$ they reduced the variational problem to radial probability measures, while for $s=3$ their explicit estimate used a pointwise lower bound that yields the coefficient $1.1185$ in the resulting ionization bound.  We solve the remaining one--dimensional radial variational problem at $s=3$ exactly.  After passing to logarithmic radius and an exponentially tilted measure, the minimization becomes a maximization problem for the translation--invariant kernel
+\[
+ k(t)=\ee^{-|t|}-\ee^{-2|t|}.
+\]
+The unique normalized maximizer is supported on a finite interval and has cosine density.  Writing
+\[
+ a_*:=\frac{1}{\sqrt2}\arctan\sqrt2,
+\]
+we obtain
+\[
+ \boxed{\displaystyle
+ \beta_3=\frac{3\ee^{2a_*}}{1+3\ee^{2a_*}}
+ =0.9205346822904167\ldots}
+\]
+and hence $\beta_3^{-1}=1.086325175181735\ldots$.  The proof uses an exact obstacle condition, compactness of maximizing sequences, endpoint smooth pasting, and a conditional negative--definiteness argument on the extremal support based on a Poincar\'e estimate.  We also record the implication for the leading constant in the Hundertmark--Pattakos--Schulz framework and isolate the remaining finite--$N$ bookkeeping needed for a sharpened atomic bound.
+\end{abstract}
+
+\input{chapter/01_introduction}
+\input{chapter/02_radial_reduction}
+\input{chapter/03_logarithmic_problem}
+\input{chapter/04_extremizer}
+\input{chapter/05_global_optimality}
+\input{chapter/06_atomic_consequence}
+\input{chapter/07_outlook}
+\appendix
+\input{chapter/A_proof_audit}
+
+\bibliographystyle{abbrv}
+\bibliography{references}
+
+\end{document}

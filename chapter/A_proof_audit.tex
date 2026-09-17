@@ -1,0 +1,60 @@
+\section{Proof audit and technical checkpoints}\label{app:audit}
+
+This appendix records the points at which a formal Euler--Lagrange calculation can fail and explains how they are handled in the proof above.  It is included deliberately: the exact numerical value of $\beta_3$ is meaningful only if the variational argument is genuinely global.
+
+\subsection{Enlarging the HPS admissible class}
+
+The HPS definition uses radial probability measures belonging to $H^{-1}(\R^3)$ and with finite second moment.  For the lower bound we enlarged the class after radial reduction.  This is harmless because the lower bound is proved for the larger class, while the explicit optimizer \eqref{eq:rho-star} is an $H^{-1}$ probability density with compact support bounded away from the origin.  Hence the lower and upper bounds meet inside the original HPS class.
+
+\subsection{Existence and loss of exponential moments}
+
+Weak compactness alone does not preserve the constraints
+\[
+ A[\sigma]=B[\sigma]=1,
+\]
+because exponentially small masses can escape to large $|t|$ while carrying a nonvanishing exponential moment.  The proof of \Cref{lem:existence} therefore uses more than tightness.  If a weak limit has $A B<1$, amplitude and translation normalization multiplies $J$ by $(AB)^{-1}>1$, contradicting the definition of the supremum.  This closes the only possible moment--loss mechanism.
+
+\subsection{The obstacle condition without an abstract KKT theorem}
+
+The first variation is derived from the scale-- and translation--invariant quotient
+\[
+ \frac{J[\sigma]}{A[\sigma]B[\sigma]}.
+\]
+Adding an atom $\varepsilon\delta_t$ gives the global inequality directly.  Equality on the support then follows from the identity
+\[
+ \int\left[M(\ee^t+\ee^{-t})-2(k*\sigma)(t)\right]\dd\sigma(t)=0
+\]
+and nonnegativity of the bracket.  Thus no constraint qualification for an infinite-dimensional KKT theorem is required.
+
+\subsection{Atoms and smooth pasting}
+
+The cusp of $k$ at the origin is essential.  An atom of mass $m$ in $\sigma$ produces an upward derivative jump $2m$ in $k*\sigma$ and hence a downward jump $-4m$ in the derivative of the nonnegative obstacle.  This is incompatible with contact at a local minimum, excluding atoms.
+
+For a compactly supported atomless finite measure, convolution with the Lipschitz kernel $k$ is $C^1$: the one-sided derivative discontinuity of $k'$ occurs only at $u=t$, which carries zero mass, and continuity follows by dominated convergence after splitting off a small neighborhood of $t$.  Therefore the obstacle is $C^1$, and at either extremal contact point one has both value and derivative equal to zero.  This justifies the smooth-pasting equations used in \Cref{lem:endpoints}.
+
+\subsection{Conditional negativity for signed measures}
+
+For a finite signed measure $\eta$ satisfying the two moment constraints, the function
+\[
+ p(t)=\int\ee^{|t-u|}\dd\eta(u)
+\]
+is compactly supported in the same interval and belongs to $H_0^1$.  Distributionally,
+\[
+ (\partial_t^2-1)p=2\eta.
+\]
+For smooth compactly supported approximations preserving the two moments, Plancherel gives \eqref{eq:Jeta-identity}.  The identity extends to finite signed measures by approximation because $k$ is bounded and continuous, while the right side is continuous in the induced $H^1$ topology for $p$.  Equivalently, one may regard \eqref{eq:Jeta-identity} as a quadratic-form identity associated with the Fourier multiplier
+\[
+ \widehat{k}(\xi)=\frac{2(2-\xi^2)}{(1+\xi^2)(4+\xi^2)}.
+\]
+The strict inequality ultimately uses only
+\[
+ 2a_*<\frac{\pi}{\sqrt5}.
+\]
+
+\subsection{Why the global argument does not assume connected support}
+
+No connectedness assumption on $\supp\sigma$ is made.  We define only its extremal points $a$ and $b$.  Compactness and smooth pasting at these two points yield the endpoint identities and hence $a+b=0$.  If a maximizer had value at least $M_*$, its extremal support points would lie inside $[-a_*,a_*]$, regardless of holes in the support.  The difference measure $\eta=\sigma-\sigma_*$ is therefore supported in the full candidate interval, exactly the hypothesis required in \Cref{lem:conditional-negativity}.
+
+\subsection{What is not claimed here}
+
+The exact evaluation of $\beta_3$ is a statement about the mean--field variational constant.  The present manuscript does not claim that the full finite--$Z$ HPS theorem is obtained by mechanically replacing $1.1185$ with $1.08633$.  Their finite--$N$ comparison between $\alpha_{N,3}$ and $\beta_3$, together with the weighted kinetic estimates, must be reoptimized with the exact input.  Likewise, no claim of the ionization conjecture $N_c(Z)\le Z+C$ is made here.

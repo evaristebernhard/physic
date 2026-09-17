@@ -1,0 +1,137 @@
+\section{Construction of the extremizer}\label{sec:extremizer}
+
+Let
+\begin{equation}\label{eq:a-star}
+ a_*:=\frac1{\sqrt2}\arctan\sqrt2,
+ \qquad q:=\sqrt2.
+\end{equation}
+Then
+\begin{equation}\label{eq:tan-condition}
+ \tan(q a_*)=q.
+\end{equation}
+Define
+\begin{equation}\label{eq:M-star}
+ M_*:=\frac{2}{1+3\ee^{2a_*}},
+\end{equation}
+and
+\begin{equation}\label{eq:C-star}
+ C_*:=\frac{3\sqrt3\,\ee^{a_*}}{1+3\ee^{2a_*}}.
+\end{equation}
+We consider the positive measure
+\begin{equation}\label{eq:sigma-star}
+ \dd\sigma_*(t)
+ :=C_*\cos(qt)\,\mathbf 1_{[-a_*,a_*]}(t)\,\dd t.
+\end{equation}
+Since $qa_*\in(0,\pi/2)$, the density is strictly positive in the interior of its support.
+
+\begin{proposition}[Normalization and contact equation]\label{prop:candidate}
+The measure $\sigma_*$ satisfies
+\[
+ A[\sigma_*]=B[\sigma_*]=1,
+\]
+and
+\begin{equation}\label{eq:contact-inside}
+ (k*\sigma_*)(t)=M_*\cosh t,
+ \qquad |t|\le a_*.
+\end{equation}
+Consequently
+\[
+ J[\sigma_*]=M_*.
+\]
+\end{proposition}
+
+\begin{proof}
+By symmetry it is enough to compute $B[\sigma_*]$.  Using $\tan(qa_*)=q$ and $q^2=2$,
+\[
+ \int_{-a_*}^{a_*}\ee^t\cos(qt)\,\dd t
+ =\frac{3\ee^{a_*}+\ee^{-a_*}}{3\sqrt3}.
+\]
+The choice \eqref{eq:C-star} therefore gives $B[\sigma_*]=1$, and symmetry gives $A[\sigma_*]=1$.
+
+For $\alpha>0$ define
+\[
+ Y_\alpha(t):=\int\ee^{-\alpha|t-u|}\,\dd\sigma_*(u).
+\]
+On the interior of the support,
+\[
+ (-\partial_t^2+\alpha^2)Y_\alpha
+ =2\alpha C_*\cos(qt).
+\]
+Hence
+\[
+ Y_\alpha(t)
+ =\frac{2\alpha C_*}{\alpha^2+q^2}\cos(qt)
+ +A_\alpha\cosh(\alpha t),
+ \qquad |t|<a_*,
+\]
+where evenness eliminates the $\sinh$ term.  For $\alpha=1$ and $\alpha=2$ the particular coefficients coincide:
+\[
+ \frac{2C_*}{1+q^2}
+ =\frac{4C_*}{4+q^2}
+ =\frac{2C_*}{3}.
+\]
+For $t\ge a_*$, $Y_\alpha$ is a pure multiple of $\ee^{-\alpha t}$, and therefore obeys the Robin condition
+\[
+ Y_\alpha'(a_*)=-\alpha Y_\alpha(a_*).
+\]
+For $\alpha=2$, condition \eqref{eq:tan-condition} makes the particular solution itself satisfy this Robin condition; hence $A_2=0$.  Subtracting $Y_2$ from $Y_1$ cancels the cosine particular solutions and gives
+\[
+ (k*\sigma_*)(t)=Y_1(t)-Y_2(t)=A_1\cosh t.
+\]
+Using the normalization $B[\sigma_*]=1$ in the exterior matching formula determines
+\[
+ A_1=\frac{2}{1+3\ee^{2a_*}}=M_*.
+\]
+This proves \eqref{eq:contact-inside}.  Finally,
+\[
+ J[\sigma_*]
+ =\int(k*\sigma_*)\,\dd\sigma_*
+ =M_*\int\cosh t\,\dd\sigma_*(t)
+ =M_*,
+\]
+because $A=B=1$ implies $\int\cosh t\,\dd\sigma_*=1$.
+\end{proof}
+
+The contact equation extends to a strict obstacle inequality outside the support.
+
+\begin{proposition}[Exact obstacle factorization]\label{prop:obstacle-star}
+Let
+\[
+ V_*(t):=M_*(\ee^t+\ee^{-t})-2(k*\sigma_*)(t).
+\]
+Then $V_*(t)=0$ for $|t|\le a_*$ and $V_*(t)>0$ for $|t|>a_*$.  More precisely, for $t\ge a_*$ and
+\[
+ z:=\ee^{t-a_*}\ge1,
+\]
+one has
+\begin{equation}\label{eq:factor-obstacle}
+ \boxed{\displaystyle
+ V_*(t)=M_*\ee^{a_*}\frac{(z-1)^2(z+2)}{z^2}.}
+\end{equation}
+The formula for $t\le-a_*$ follows by symmetry.
+\end{proposition}
+
+\begin{proof}
+The vanishing on the support is exactly \eqref{eq:contact-inside}.  For $t\ge a_*$, all points $u$ in the support satisfy $u\le t$, so
+\[
+ (k*\sigma_*)(t)
+ =\ee^{-t}\int\ee^u\,\dd\sigma_*(u)
+ -\ee^{-2t}\int\ee^{2u}\,\dd\sigma_*(u).
+\]
+The first integral equals one.  The second is determined by the two contact conditions at $a_*$, namely $V_*(a_*)=V_*'(a_*)=0$.  Substituting the resulting coefficient and writing $z=\ee^{t-a_*}$ gives the exact factorization \eqref{eq:factor-obstacle}.  Its right side is nonnegative and vanishes only at $z=1$.
+\end{proof}
+
+Returning to the radial variable, \eqref{eq:sigma-def} gives
+\begin{equation}\label{eq:nu-star}
+ \dd\nu_*(r)
+ =C_*r^{-2}\cos(\sqrt2\log r)\,
+ \mathbf 1_{[\ee^{-a_*},\ee^{a_*}]}(r)\,\dd r.
+\end{equation}
+Thus the corresponding three--dimensional radial density is
+\begin{equation}\label{eq:rho-star}
+ \rho_*(x)
+ =\frac{C_*}{4\pi}|x|^{-4}
+ \cos(\sqrt2\log|x|)\,
+ \mathbf 1_{\{\ee^{-a_*}\le|x|\le\ee^{a_*}\}}.
+\end{equation}
+This density is bounded on its annular support and hence belongs to the HPS admissible class.

@@ -1,0 +1,195 @@
+\section{Global optimality}\label{sec:global}
+
+We now prove that the candidate from \Cref{sec:extremizer} is the global maximizer of \eqref{eq:M-normalized}.
+
+\subsection{Structure of an arbitrary maximizer}
+
+Let $\sigma$ be a normalized maximizer, let
+\[
+ M:=J[\sigma]>0,
+\]
+and set $K:=k*\sigma$.
+
+\begin{lemma}[Compact support and absence of atoms]\label{lem:compact-atomless}
+Every normalized maximizer has compact support and is atomless.
+\end{lemma}
+
+\begin{proof}
+The moment normalization implies
+\[
+ \sigma(\R)^2\le A[\sigma]B[\sigma]=1.
+\]
+Moreover $0\le k\le1/4$, hence
+\[
+ 2K(t)\le\frac12\sigma(\R)\le\frac12.
+\]
+On the support, the obstacle condition \eqref{eq:obstacle} is an equality, so
+\[
+ M(\ee^t+\ee^{-t})=2K(t)\le\frac12.
+\]
+Since $M>0$, this confines the support to a compact interval.
+
+Suppose that $\sigma$ has an atom of mass $m>0$ at $t_0$.  Since
+\[
+ k(x)=\ee^{-|x|}-\ee^{-2|x|}=|x|+O(x^2)
+ \qquad (x\to0),
+\]
+the derivative of $K$ has the jump
+\[
+ K'(t_0+)-K'(t_0-)=2m.
+\]
+Thus the nonnegative obstacle
+\[
+ V(t)=M(\ee^t+\ee^{-t})-2K(t)
+\]
+has
+\[
+ V'(t_0+)-V'(t_0-)=-4m<0.
+\]
+But $t_0\in\supp\sigma$ implies $V(t_0)=0$, so $t_0$ is a minimum of the nonnegative function $V$; its one-sided derivatives must satisfy $V'(t_0-)\le0\le V'(t_0+)$, which is incompatible with the displayed negative jump.  Hence $\sigma$ has no atoms.
+\end{proof}
+
+Because $\sigma$ is atomless and compactly supported, convolution with the Lipschitz kernel $k$ is $C^1$.  Thus the obstacle is $C^1$ and the boundary of the support satisfies smooth pasting.
+
+\begin{lemma}[Endpoint identities]\label{lem:endpoints}
+Let
+\[
+ a:=\inf\supp\sigma,
+ \qquad b:=\sup\supp\sigma.
+\]
+Then
+\begin{equation}\label{eq:M-right}
+ M=\frac{2}{1+3\ee^{2b}},
+\end{equation}
+and
+\begin{equation}\label{eq:M-left}
+ M=\frac{2\ee^{2a}}{\ee^{2a}+3}.
+\end{equation}
+Consequently $a+b=0$.
+\end{lemma}
+
+\begin{proof}
+For $t\ge b$,
+\[
+ K(t)=\ee^{-t}\int\ee^u\,\dd\sigma(u)
+ -\ee^{-2t}\int\ee^{2u}\,\dd\sigma(u)
+ =\ee^{-t}-C_2\ee^{-2t},
+\]
+where $C_2:=\int\ee^{2u}\dd\sigma(u)$.  Since $b$ is a contact point and $V$ is $C^1$,
+\[
+ V(b)=V'(b)=0.
+\]
+Eliminating $C_2$ from these two equations yields \eqref{eq:M-right}.  The same argument at the left endpoint gives \eqref{eq:M-left}.  Equating the two expressions for $M$ gives
+\[
+ \ee^{2(a+b)}=1,
+\]
+hence $a+b=0$.
+\end{proof}
+
+We may therefore write the support of any maximizer as a compact subset of $[-c,c]$ with endpoints $\pm c$, and
+\begin{equation}\label{eq:M-c}
+ M=\frac{2}{1+3\ee^{2c}}.
+\end{equation}
+
+\subsection{Conditional negative definiteness on the extremal interval}
+
+The Fourier transform of the kernel is
+\begin{equation}\label{eq:khat}
+ \widehat{k}(\xi)
+ =\frac{2}{1+\xi^2}-\frac{4}{4+\xi^2}
+ =\frac{2(2-\xi^2)}{(1+\xi^2)(4+\xi^2)}.
+\end{equation}
+Thus $k$ is not positive definite on the whole line.  What is needed is negativity on the codimension--two space of perturbations preserving the two exponential moments, restricted to the candidate support.
+
+\begin{lemma}[Conditional negativity]\label{lem:conditional-negativity}
+Let $\eta$ be a finite signed measure supported in $[-a_*,a_*]$ and satisfying
+\begin{equation}\label{eq:eta-moments}
+ \int\ee^t\,\dd\eta(t)=
+ \int\ee^{-t}\,\dd\eta(t)=0.
+\end{equation}
+Then
+\begin{equation}\label{eq:Jeta-negative}
+ J[\eta]\le0,
+\end{equation}
+with equality only for $\eta=0$.
+\end{lemma}
+
+\begin{proof}
+Define
+\begin{equation}\label{eq:p-def}
+ p(t):=\int\ee^{|t-u|}\,\dd\eta(u).
+\end{equation}
+The two moment conditions imply $p(t)=0$ for $|t|\ge a_*$.  Moreover $p\in H_0^1(-a_*,a_*)$ and, in the sense of distributions,
+\begin{equation}\label{eq:p-eta}
+ (\partial_t^2-1)p=2\eta.
+\end{equation}
+Using \eqref{eq:khat}, \eqref{eq:p-eta}, and Plancherel (first for smooth approximations and then by passage to the limit) gives the exact identity
+\begin{equation}\label{eq:Jeta-identity}
+ J[\eta]
+ =\frac12\left[
+ -\|p'\|_2^2+5\|p\|_2^2
+ -18\left\langle p,(-\partial_t^2+4)^{-1}p\right\rangle
+ \right].
+\end{equation}
+The resolvent term is nonnegative, hence
+\[
+ J[\eta]
+ \le\frac12\bigl(5\|p\|_2^2-\|p'\|_2^2\bigr).
+\]
+Poincar\'e's inequality on an interval of length $2a_*$ yields
+\[
+ \|p'\|_2^2
+ \ge\frac{\pi^2}{(2a_*)^2}\|p\|_2^2.
+\]
+Since
+\begin{equation}\label{eq:length-threshold}
+ 2a_*=1.3510217177\ldots
+ <\frac{\pi}{\sqrt5}=1.4049629462\ldots,
+\end{equation}
+we have $\pi^2/(2a_*)^2>5$, proving \eqref{eq:Jeta-negative}.  Equality forces $p=0$, and then \eqref{eq:p-eta} gives $\eta=0$.
+\end{proof}
+
+\subsection{Completion of the proof}
+
+\begin{proof}[Proof of \Cref{thm:main}]
+By \Cref{lem:existence}, choose a normalized global maximizer $\sigma$ with value $M$.  Since $\sigma_*$ is admissible and has value $M_*$,
+\[
+ M\ge M_*.
+\]
+Let the support endpoints of $\sigma$ be $\pm c$.  The endpoint identity \eqref{eq:M-c}, together with the strict monotonicity of $c\mapsto2/(1+3\ee^{2c})$, implies
+\[
+ c\le a_*.
+\]
+Hence both $\sigma$ and $\sigma_*$ are supported in $[-a_*,a_*]$.
+
+Set
+\[
+ \eta:=\sigma-\sigma_*.
+\]
+Because both measures satisfy $A=B=1$, $\eta$ obeys \eqref{eq:eta-moments}.  Expanding the quadratic functional gives
+\[
+ J[\sigma]
+ =J[\sigma_*]
+ +2\int(k*\sigma_*)(t)\,\dd\eta(t)
+ +J[\eta].
+\]
+On $[-a_*,a_*]$, \Cref{prop:candidate} gives $k*\sigma_*=M_*\cosh t$.  Therefore
+\[
+ 2\int(k*\sigma_*)\,\dd\eta
+ =M_*\int(\ee^t+\ee^{-t})\,\dd\eta=0.
+\]
+By \Cref{lem:conditional-negativity}, $J[\eta]\le0$.  Thus
+\[
+ M=J[\sigma]\le J[\sigma_*]=M_*.
+\]
+Together with $M\ge M_*$ this gives $M=M_*$ and, by the strict case in \Cref{lem:conditional-negativity}, $\sigma=\sigma_*$.  Hence the normalized maximizer is unique.
+
+Finally, \eqref{eq:M-def} gives
+\[
+ \beta_3
+ =1-\frac{M_*}{2}
+ =1-\frac1{1+3\ee^{2a_*}}
+ =\frac{3\ee^{2a_*}}{1+3\ee^{2a_*}},
+\]
+which is \eqref{eq:beta-exact}.  Undoing the logarithmic tilt yields \eqref{eq:nu-star}--\eqref{eq:rho-star}.  Translation in logarithmic radius corresponds to dilation in $r$, giving uniqueness up to scaling in the original problem.
+\end{proof}

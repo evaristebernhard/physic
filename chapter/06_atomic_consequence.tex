@@ -1,0 +1,38 @@
+\section{Consequence for the excess--charge framework}\label{sec:atomic}
+
+The role of $\beta_s$ in \cite{HPS2025} is to control the large--$N$ mean--field limit of the finite--configuration constants $\alpha_{N,s}$.  Their explicit $s=3$ estimate uses the pointwise radial lower bound
+\[
+ \beta_3\ge0.8941074569\ldots,
+\]
+whose reciprocal is
+\[
+ 1.118433799\ldots .
+\]
+The exact evaluation in \Cref{thm:main} instead gives
+\begin{equation}\label{eq:new-leading}
+ \boxed{\displaystyle
+ \beta_3^{-1}=1.086325175181735\ldots .}
+\end{equation}
+Thus, at the mean--field level, the coefficient available to the $s=3$ weighted method improves from approximately $1.1184$ to approximately $1.08633$.
+
+This statement should be distinguished from a fully propagated finite--$Z$ atomic theorem.  HPS compare $\alpha_{N,3}$ with $\beta_3$ through quantitative smearing estimates and then combine that comparison with weighted kinetic--energy bounds.  Replacing the lower estimate for $\beta_3$ by its exact value improves the input to those arguments, but the optimal explicit lower--order term must be recomputed from the complete finite--$N$ inequalities.  We therefore record the following consequence in the form needed for such a recomputation.
+
+\begin{corollary}[Exact mean--field input]\label{cor:hps-input}
+Every finite--$N$ estimate in the HPS $s=3$ argument that depends monotonically on the mean--field constant $\beta_3$ may use the exact value
+\[
+ \beta_3=0.9205346822904167\ldots
+\]
+in place of the pointwise lower bound $0.8941074569\ldots$.
+\end{corollary}
+
+The improvement has a structural interpretation.  The pointwise estimate minimizes
+\[
+ g(t)=\frac{1+t^3}{1+t^2}
+\]
+for a single pair of radii.  It therefore permits every pair in the measure to realize the same worst ratio.  The exact optimizer shows that the true global compromise is a log--radial density
+\[
+ \rho_*(r)\propto r^{-4}\cos(\sqrt2\log r)
+\]
+on a finite annulus.  The resulting constant is strictly larger because the pairwise worst geometry cannot be realized simultaneously by a probability measure.
+
+It is also useful to compare with the numerical trial family $\rho(r)\propto r^{-p}$ on a finite annulus considered in the HPS analysis.  The exact extremizer is centered on the critical power $p=4$ but acquires the log--oscillatory cosine factor forced by the Euler--Lagrange equation.  This explains why the simple $p\approx4$ family is already numerically close to the true value while remaining strictly nonoptimal.

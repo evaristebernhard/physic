@@ -1,0 +1,60 @@
+\section{Radial reduction at $s=3$}\label{sec:radial}
+
+We begin from the radial reduction proved in \cite{HPS2025}.  Let $\mu$ be radial and let $\nu$ denote its induced probability measure on radii, so that for every bounded radial test function $f$,
+\[
+ \int_{\R^3}f(|x|)\,\dd\mu(x)
+ =\int_0^\infty f(r)\,\dd\nu(r).
+\]
+Newton's theorem gives
+\[
+ \int_{S^2}\int_{S^2}
+ \frac{\dd\omega\,\dd\omega'}{(4\pi)^2|r\omega-s\omega'|}
+ =\frac1{\max\{r,s\}}.
+\]
+Consequently the $s=3$ quotient becomes
+\begin{equation}\label{eq:radial-quotient}
+ \mathcal Q_3[\nu]
+ :=
+ \frac{\displaystyle
+ \frac12\iint_{(0,\infty)^2}
+ \frac{r^3+s^3}{\max\{r,s\}}\,\dd\nu(r)\dd\nu(s)}
+ {\displaystyle\int_0^\infty r^2\,\dd\nu(r)}.
+\end{equation}
+Thus
+\begin{equation}\label{eq:beta-radial}
+ \beta_3=\inf_{\nu\in\mathcal A}\mathcal Q_3[\nu],
+\end{equation}
+where $\mathcal A$ is the radial image of the HPS admissible class.  The quotient is invariant under dilations: if $\nu_\lambda$ is the pushforward of $\nu$ under $r\mapsto\lambda r$, then
+\[
+ \mathcal Q_3[\nu_\lambda]=\mathcal Q_3[\nu].
+\]
+
+It is useful to isolate the kernel
+\[
+ K_3(r,s):=\frac{r^3+s^3}{2\max\{r,s\}}.
+\]
+For $0<r\le s$, writing $t=r/s$ gives
+\[
+ K_3(r,s)=\frac{s^2}{2}(1+t^3).
+\]
+The denominator contribution of the pair is naturally proportional to
+\[
+ \frac{r^2+s^2}{2}=\frac{s^2}{2}(1+t^2).
+\]
+The pointwise HPS estimate therefore uses
+\[
+ \frac{1+t^3}{1+t^2}\ge\min_{0\le t\le1}\frac{1+t^3}{1+t^2}.
+\]
+The minimum occurs at the unique $t_0\in(0,1)$ satisfying
+\[
+ t_0^3+3t_0-2=0,
+\]
+and yields
+\[
+ \frac{1+t_0^3}{1+t_0^2}=0.8941074569\ldots .
+\]
+Our purpose is to avoid this pairwise minimization.  A probability measure cannot, in general, arrange all of its pairs at the same worst radius ratio; the global measure constraint therefore contains additional information.  The logarithmic formulation below makes this constraint explicit.
+
+\begin{remark}[Admissibility]\label{rem:admissibility}
+HPS define $\beta_s$ over probability measures in $H^{-1}(\R^3)$ with the required finite moment.  The extremizer constructed below is absolutely continuous, supported on a compact annulus bounded away from the origin, and has bounded radial density there.  Hence it belongs to $H^{-1}(\R^3)$ and to the required moment class.  For the lower bound we may temporarily enlarge the radial admissible class to all positive radial probability measures for which \eqref{eq:radial-quotient} is finite.  Since the minimizer found in the enlarged class is HPS-admissible, equality of the two infima follows.
+\end{remark}

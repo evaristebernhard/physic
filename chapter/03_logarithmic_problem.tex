@@ -57,6 +57,14 @@ In this gauge,
  M=\sup\left\{J[\sigma]:\sigma\ge0,
  \int\ee^{-t}\dd\sigma=\int\ee^t\dd\sigma=1\right\}.
 \end{equation}
+The supremum is strictly positive.  Indeed, for any $a>0$ the two--point measure
+\[
+ \sigma_a:=\frac{\delta_a+\delta_{-a}}{2\cosh a}
+\]
+satisfies $A[\sigma_a]=B[\sigma_a]=1$ and, since $k(0)=0$ and $k(2a)>0$,
+\[
+ J[\sigma_a]=\frac{k(2a)}{2\cosh^2 a}>0.
+\]
 
 \begin{lemma}[Existence of a maximizer]\label{lem:existence}
 The supremum in \eqref{eq:M-normalized} is attained.
@@ -75,13 +83,27 @@ Moreover, by Cauchy--Schwarz,
  \le\left(\int\ee^t\dd\sigma_n\right)
  \left(\int\ee^{-t}\dd\sigma_n\right)=1.
 \]
-Hence the sequence is tight and uniformly bounded in mass.  Passing to a subsequence, $\sigma_n\rightharpoonup\sigma$ weakly as finite positive measures.  Since $k$ is bounded and continuous, $J[\sigma_n]\to J[\sigma]$.
-
-Lower semicontinuity of the exponential moments gives $A[\sigma]\le1$ and $B[\sigma]\le1$.  If $A[\sigma]B[\sigma]<1$, rescaling the amplitude and translating $\sigma$ produces a measure $\widetilde\sigma$ with $A[\widetilde\sigma]=B[\widetilde\sigma]=1$ and
+Hence the sequence is tight and uniformly bounded in mass.  Passing to a subsequence, $\sigma_n\rightharpoonup\sigma$ narrowly as finite positive measures.  Narrow convergence together with convergence of the total masses implies
 \[
- J[\widetilde\sigma]=\frac{J[\sigma]}{A[\sigma]B[\sigma]}>J[\sigma],
+ \sigma_n\otimes\sigma_n\rightharpoonup\sigma\otimes\sigma
 \]
-contradicting maximality of the original sequence.  Since the supremum is positive, $A[\sigma],B[\sigma]>0$, and therefore $A[\sigma]=B[\sigma]=1$.  Thus $\sigma$ is a maximizer.
+on $\R^2$.  Since $k(t-u)$ is bounded and continuous, it follows that
+\[
+ J[\sigma_n]\longrightarrow J[\sigma].
+\]
+In particular $J[\sigma]=M>0$, so $\sigma$ is nonzero.
+
+Lower semicontinuity of the exponential moments gives $A[\sigma]\le1$ and $B[\sigma]\le1$.  Since $\sigma$ is a nonzero positive measure, both $A[\sigma]$ and $B[\sigma]$ are strictly positive.  If $A[\sigma]B[\sigma]<1$, first multiply $\sigma$ by $(A[\sigma]B[\sigma])^{-1/2}$ and then translate it by
+\[
+ c=\frac12\log\frac{A[\sigma]}{B[\sigma]}.
+\]
+The resulting positive measure $\widetilde\sigma$ satisfies $A[\widetilde\sigma]=B[\widetilde\sigma]=1$, while amplitude scaling and translation invariance give
+\[
+ J[\widetilde\sigma]
+ =\frac{J[\sigma]}{A[\sigma]B[\sigma]}
+ >J[\sigma]=M,
+\]
+a contradiction to the definition of $M$.  Hence $A[\sigma]B[\sigma]=1$.  Together with $A[\sigma]\le1$ and $B[\sigma]\le1$, this forces $A[\sigma]=B[\sigma]=1$.  Thus $\sigma$ is a normalized maximizer.
 \end{proof}
 
 The variational inequality can be obtained without invoking an abstract infinite-dimensional KKT theorem.

@@ -1,0 +1,114 @@
+\section{The logarithmic variational problem}\label{sec:log}
+
+Set
+\[
+ t=\log r,
+\]
+and let $\bar\nu$ be the pushforward of $\nu$ under $r\mapsto t$.  Introduce the tilted positive measure $\sigma$ on $\R$ by
+\begin{equation}\label{eq:sigma-def}
+ \dd\sigma(t):=\ee^t\,\dd\bar\nu(t).
+\end{equation}
+Then
+\begin{equation}\label{eq:A-B}
+ A[\sigma]:=\int_\R \ee^{-t}\,\dd\sigma(t)=1,
+ \qquad
+ B[\sigma]:=\int_\R \ee^t\,\dd\sigma(t)=\int_0^\infty r^2\,\dd\nu(r).
+\end{equation}
+
+For $t\ge u$, direct substitution gives
+\[
+ K_3(\ee^t,\ee^u)\,\ee^{-t}\ee^{-u}
+ =\frac12\left(\ee^{t-u}+\ee^{-2(t-u)}\right).
+\]
+Thus, with $d=|t-u|$,
+\begin{equation}\label{eq:F-kernel}
+ F(d):=\frac12(\ee^d+\ee^{-2d})
+ =\cosh d-\frac12\bigl(\ee^{-d}-\ee^{-2d}\bigr).
+\end{equation}
+Define
+\begin{equation}\label{eq:k-def}
+ k(d):=\ee^{-|d|}-\ee^{-2|d|}.
+\end{equation}
+Because
+\[
+ \iint \cosh(t-u)\,\dd\sigma(t)\dd\sigma(u)=A[\sigma]B[\sigma],
+\]
+we obtain
+\begin{equation}\label{eq:Q-log}
+ \mathcal Q_3[\nu]
+ =1-\frac{1}{2}\frac{J[\sigma]}{A[\sigma]B[\sigma]},
+\end{equation}
+where
+\begin{equation}\label{eq:J-def}
+ J[\sigma]:=\iint_{\R^2}k(t-u)\,\dd\sigma(t)\dd\sigma(u).
+\end{equation}
+Therefore
+\begin{equation}\label{eq:M-def}
+ \beta_3=1-\frac{M}{2},
+ \qquad
+ M:=\sup_{\sigma\ge0}\frac{J[\sigma]}{A[\sigma]B[\sigma]}.
+\end{equation}
+The quotient in \eqref{eq:M-def} is invariant under multiplication of $\sigma$ by a positive scalar and under translations $t\mapsto t+c$.  Hence we may impose the two normalizations
+\begin{equation}\label{eq:normalization}
+ A[\sigma]=B[\sigma]=1.
+\end{equation}
+In this gauge,
+\begin{equation}\label{eq:M-normalized}
+ M=\sup\left\{J[\sigma]:\sigma\ge0,
+ \int\ee^{-t}\dd\sigma=\int\ee^t\dd\sigma=1\right\}.
+\end{equation}
+
+\begin{lemma}[Existence of a maximizer]\label{lem:existence}
+The supremum in \eqref{eq:M-normalized} is attained.
+\end{lemma}
+
+\begin{proof}
+Let $(\sigma_n)$ be a maximizing sequence satisfying \eqref{eq:normalization}.  The moment constraints imply the uniform tail bounds
+\[
+ \sigma_n((R,\infty))\le \ee^{-R},
+ \qquad
+ \sigma_n(( -\infty,-R))\le \ee^{-R}.
+\]
+Moreover, by Cauchy--Schwarz,
+\[
+ \sigma_n(\R)^2
+ \le\left(\int\ee^t\dd\sigma_n\right)
+ \left(\int\ee^{-t}\dd\sigma_n\right)=1.
+\]
+Hence the sequence is tight and uniformly bounded in mass.  Passing to a subsequence, $\sigma_n\rightharpoonup\sigma$ weakly as finite positive measures.  Since $k$ is bounded and continuous, $J[\sigma_n]\to J[\sigma]$.
+
+Lower semicontinuity of the exponential moments gives $A[\sigma]\le1$ and $B[\sigma]\le1$.  If $A[\sigma]B[\sigma]<1$, rescaling the amplitude and translating $\sigma$ produces a measure $\widetilde\sigma$ with $A[\widetilde\sigma]=B[\widetilde\sigma]=1$ and
+\[
+ J[\widetilde\sigma]=\frac{J[\sigma]}{A[\sigma]B[\sigma]}>J[\sigma],
+\]
+contradicting maximality of the original sequence.  Since the supremum is positive, $A[\sigma],B[\sigma]>0$, and therefore $A[\sigma]=B[\sigma]=1$.  Thus $\sigma$ is a maximizer.
+\end{proof}
+
+The variational inequality can be obtained without invoking an abstract infinite-dimensional KKT theorem.
+
+\begin{lemma}[Obstacle condition]\label{lem:obstacle}
+Let $\sigma$ be a normalized maximizer and let $M=J[\sigma]$.  Then
+\begin{equation}\label{eq:obstacle}
+ 2(k*\sigma)(t)\le M(\ee^t+\ee^{-t})
+ \qquad\text{for all }t\in\R,
+\end{equation}
+and equality holds on $\supp\sigma$.
+\end{lemma}
+
+\begin{proof}
+Consider $\sigma+\varepsilon\delta_t$.  Since the quotient $J/(AB)$ is invariant under subsequent amplitude and translation renormalization, maximality gives
+\[
+ \frac{J[\sigma+\varepsilon\delta_t]}
+ {A[\sigma+\varepsilon\delta_t]B[\sigma+\varepsilon\delta_t]}
+ \le M.
+\]
+Because $k(0)=0$, differentiation at $\varepsilon=0+$ yields \eqref{eq:obstacle}.  Define
+\[
+ V(t):=M(\ee^t+\ee^{-t})-2(k*\sigma)(t)\ge0.
+\]
+Integrating against $\sigma$ gives
+\[
+ \int V\,\dd\sigma=M(A+B)-2J=0.
+\]
+Thus $V=0$ $\sigma$-almost everywhere, and continuity of $V$ implies equality on $\supp\sigma$.
+\end{proof}

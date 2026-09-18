@@ -1,20 +1,15 @@
-\section{Outlook: beyond the cubic mean--field obstruction}\label{sec:outlook}
+\section{Scope and further questions}\label{sec:outlook}
 
-The exact computation of $\beta_3$ and \Cref{thm:finite-Z} complete the finite--$Z$ propagation of the cubic HPS mean--field constant through the presently available finite--$N$ and kinetic estimates.  They do not prove the ionization conjecture $N_c(Z)\le Z+C$.  The remaining gap is no longer the radial mean--field constant or its finite--$N$ bookkeeping; further progress must improve the many--fermion information entering the weighted multiplier argument.
+The exact computation of $\beta_3$ and \Cref{thm:finite-Z} complete the finite--$Z$ propagation of the cubic HPS mean--field constant through the presently available finite--configuration and weighted kinetic estimates.  The two conclusions should be kept conceptually separate.  The first is an exact solution of the scalar radial mean--field variational problem.  The second is an explicit atomic bound obtained by inserting that exact constant into the existing HPS many--body framework and reoptimizing the finite--$Z$ bookkeeping.
 
-In the weighted $s=3$ multiplier identity, the Coulomb contribution is accompanied by positive terms that are discarded in the purely geometric estimate.  Schematically one has
+The resulting coefficient
 \[
- R_3+S_3+A_3+I_Nm_3=Zm_2+m_1,
+ \beta_3^{-1}=1.086325175\ldots
 \]
-where $R_3$ is the weighted electron--electron repulsion, $S_3$ is a critical Hardy surplus, $A_3$ is the excitation energy of the $(N-1)$--electron core, and $I_N$ is the ionization energy.  The exact value of $\beta_3$ shows that the purely radial mean--field obstruction corresponds to a substantially smaller gap than the pairwise estimate suggests.
+is therefore the coefficient delivered by the present cubic mean--field input together with the unchanged HPS finite--$N$ estimates.  We do not claim that it is optimal among all weighted multiplier arguments, and we do not prove the ionization conjecture $N_c(Z)\le Z+C$.
 
-The extremizer found here is particularly suggestive.  Its three--dimensional density is a compactly supported cosine modulation of $r^{-4}$.  The power $r^{-4}$ is the density associated with the critical zero mode of the weighted Hardy operator arising at $s=3$.  Thus a one--particle Hardy argument alone cannot be expected to exclude near--extremal Coulomb geometry: the two structures are nearly compatible.  The missing mechanism should instead exploit fermionic occupation constraints.  In logarithmic radius, this leads naturally to a spectral filling problem on a cylinder, where Pauli exclusion forces higher radial or angular modes once the near--zero mode is occupied.
-
-A plausible next step is therefore a stability inequality of the form
+The explicit extremizer nevertheless identifies the geometry responsible for the remaining scalar mean--field obstruction: in logarithmic radius it is a compactly supported cosine profile, and in physical space its density is proportional to
 \[
- \mathcal G_3[\Psi]+\mathcal H_3[\Psi]
- \ge \delta\,(1-\beta_3)(N-1)m_2-\mathcal R_N,
+ r^{-4}\cos(\sqrt2\log r)
 \]
-where $\mathcal G_3$ measures the excess over the exact radial mean--field minimum, $\mathcal H_3$ contains retained Hardy and core--response terms, and $\mathcal R_N$ is lower order.  The present paper supplies both the exact extremal geometry against which such a stability statement should be linearized and the fully propagated finite--$Z$ baseline against which any further gain can be measured.
-
-In particular, any future attempt to improve the coefficient below $\beta_3^{-1}=1.086325175\ldots$ within a strengthened cubic-weight argument must use information absent from the scalar radial mean--field problem.  The correct reference profile is now explicit, and deviations from it can be measured in log radius.  This opens the possibility of coupling a quantitative stability estimate for the radial variational problem to local Lieb--Thirring bounds or Pauli spectral pressure estimates.
+on a finite annulus.  Any improvement beyond the coefficient obtained here must therefore use information that is absent from the scalar radial variational problem, for example genuinely many--fermion information or additional positive terms retained from the weighted multiplier identity.  We do not pursue such extensions in the present paper.

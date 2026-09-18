@@ -12,7 +12,7 @@ Research draft evaluating the HPS cubic mean-field constant beta_3 exactly and p
 - chapter/05_global_optimality.tex — atomlessness, endpoint identities, conditional negativity, global proof
 - chapter/06_atomic_consequence.tex — HPS finite-N propagation and the sharpened finite-Z theorem
 - chapter/07_outlook.tex — scope of the present result and what would be required to go beyond the cubic mean-field obstruction
-- chapter/A_proof_audit.tex — audit of the delicate radial and finite-N steps
+- chapter/A_technical_details.tex — supplementary details for the radial and finite-N arguments
 - references.bib — bibliography
 - verify_constants.py — interval-arithmetic certification of the rounded finite-Z constants
 

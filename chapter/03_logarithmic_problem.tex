@@ -9,11 +9,11 @@ and let $\bar\nu$ be the pushforward of $\nu$ under $r\mapsto t$.  Introduce the
  \dd\sigma(t):=\ee^t\,\dd\bar\nu(t).
 \end{equation}
 Then
-\begin{equation}\label{eq:A-B}
+\[
  A[\sigma]:=\int_\R \ee^{-t}\,\dd\sigma(t)=1,
  \qquad
  B[\sigma]:=\int_\R \ee^t\,\dd\sigma(t)=\int_0^\infty r^2\,\dd\nu(r).
-\end{equation}
+\]
 
 For $t\ge u$, direct substitution gives
 \[
@@ -21,27 +21,27 @@ For $t\ge u$, direct substitution gives
  =\frac12\left(\ee^{t-u}+\ee^{-2(t-u)}\right).
 \]
 Thus, with $d=|t-u|$,
-\begin{equation}\label{eq:F-kernel}
+\[
  F(d):=\frac12(\ee^d+\ee^{-2d})
  =\cosh d-\frac12\bigl(\ee^{-d}-\ee^{-2d}\bigr).
-\end{equation}
+\]
 Define
-\begin{equation}\label{eq:k-def}
+\[
  k(d):=\ee^{-|d|}-\ee^{-2|d|}.
-\end{equation}
+\]
 Because
 \[
  \iint \cosh(t-u)\,\dd\sigma(t)\dd\sigma(u)=A[\sigma]B[\sigma],
 \]
 we obtain
-\begin{equation}\label{eq:Q-log}
+\[
  \mathcal Q_3[\nu]
  =1-\frac{1}{2}\frac{J[\sigma]}{A[\sigma]B[\sigma]},
-\end{equation}
+\]
 where
-\begin{equation}\label{eq:J-def}
+\[
  J[\sigma]:=\iint_{\R^2}k(t-u)\,\dd\sigma(t)\dd\sigma(u).
-\end{equation}
+\]
 Therefore
 \begin{equation}\label{eq:M-def}
  \beta_3=1-\frac{M}{2},
@@ -108,7 +108,7 @@ a contradiction to the definition of $M$.  Hence $A[\sigma]B[\sigma]=1$.  Togeth
 
 The variational inequality can be obtained without invoking an abstract infinite-dimensional KKT theorem.
 
-\begin{lemma}[Obstacle condition]\label{lem:obstacle}
+\begin{lemma}[Obstacle condition]
 Let $\sigma$ be a normalized maximizer and let $M=J[\sigma]$.  Then
 \begin{equation}\label{eq:obstacle}
  2(k*\sigma)(t)\le M(\ee^t+\ee^{-t})

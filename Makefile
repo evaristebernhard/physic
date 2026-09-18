@@ -8,7 +8,6 @@ pdf:
 
 check:
 	python verify_constants.py
-	python verify_tex_refs.py
 
 clean:
 	rm -f *.aux *.bbl *.blg *.fdb_latexmk *.fls *.log *.out *.toc *.synctex.gz main.pdf

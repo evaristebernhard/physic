@@ -48,7 +48,7 @@ and has spatial density proportional to
 Among radial admissible measures, the minimizer is unique up to the scaling invariance of \eqref{eq:def-beta-s}.  No uniqueness assertion is made here for minimizers in the full nonradial HPS class.
 \end{theorem}
 
-The second purpose is to propagate \Cref{thm:main} through the finite--$N$ part of the HPS argument.  Their estimates in the cubic-weight case are formulated in terms of the actual mean--field constant $\beta_3$; the pointwise lower bound enters only when the final coefficients are numericalized.  Repeating that last optimization with \eqref{eq:beta-exact} gives a genuine finite--$Z$ theorem.
+The second purpose is to propagate \Cref{thm:main} through the finite--$N$ part of the HPS argument.  Their cubic-weight estimates retain the actual mean--field constant $\beta_3$ symbolically; the pointwise lower bound enters only when the final coefficients are converted to explicit numbers.  Thus the present finite--$Z$ improvement is not obtained by replacing a decimal in the final HPS theorem: it comes from inserting the exact value \eqref{eq:beta-exact} into their symbolic chain and redoing the endpoint optimization.
 
 \begin{theorem}[Sharpened finite--$Z$ excess--charge bound]\label{thm:finite-Z}
 For every $Z\ge4$,
@@ -70,7 +70,7 @@ The proof of \Cref{thm:main} has three main steps.  First, Newton's theorem and 
 \]
 Second, the Euler--Lagrange obstacle condition determines a compactly supported cosine profile.  Third, a conditional negative--definiteness estimate on the extremal support rules out all competing radial maximizers.  The last step is where the exact solution becomes global within the radial problem rather than merely stationary.
 
-The finite--$Z$ step does not introduce a new many--body estimate.  Instead, it keeps the HPS finite--configuration and weighted kinetic inequalities unchanged and replaces only the former lower estimate for $\beta_3$ by its exact value.  One small endpoint issue must be handled explicitly: for $Z\ge4$, Lieb's bound gives
+The finite--$Z$ step deliberately keeps the HPS finite--configuration and weighted kinetic inequalities unchanged.  The new input is the exact solution of the mean--field variational problem, together with a finite--$Z$ reoptimization that tracks the admissible interval for $N/Z$.  One small endpoint issue must be handled explicitly: for $Z\ge4$, Lieb's bound gives
 \[
  \frac NZ<2+\frac1Z\le\frac94,
 \]

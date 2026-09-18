@@ -14,6 +14,7 @@ Research draft on the exact radial mean-field constant beta_3 arising in the Hun
 - chapter/07_outlook.tex — route toward Pauli/Hardy stability improvements beyond the cubic mean-field obstruction
 - chapter/A_proof_audit.tex — audit of the delicate radial and finite-N steps
 - references.bib — bibliography
+- verify_constants.py — numerical audit of the closed finite-Z constants
 
 ## Exact mean-field constant
 

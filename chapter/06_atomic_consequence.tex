@@ -1,38 +1,193 @@
-\section{Consequence for the excess--charge framework}\label{sec:atomic}
+\section{Finite--$N$ propagation and the atomic bound}\label{sec:atomic}
 
-The role of $\beta_s$ in \cite{HPS2025} is to control the large--$N$ mean--field limit of the finite--configuration constants $\alpha_{N,s}$.  Their explicit $s=3$ estimate uses the pointwise radial lower bound
+We now propagate the exact value of $\beta_3$ through the finite--configuration part of the Hundertmark--Pattakos--Schulz argument.  The point to emphasize is that the cubic-weight estimates in \cite[Section 7.3]{HPS2025} are written in terms of the actual mean--field constant $\beta_3$.  The earlier pointwise estimate
 \[
- \beta_3\ge0.8941074569\ldots,
+ \beta_3\ge0.8941074569\ldots
 \]
-whose reciprocal is
-\[
- 1.118433799\ldots .
-\]
-The exact evaluation in \Cref{thm:main} instead gives
-\begin{equation}\label{eq:new-leading}
- \boxed{\displaystyle
- \beta_3^{-1}=1.086325175181735\ldots .}
+is used only when the final coefficients are converted into explicit decimals.  Thus \Cref{thm:main} can be inserted without changing the finite--$N$ smearing argument or the weighted kinetic estimate.
+
+Set
+\begin{equation}\label{eq:c-hps}
+ c_0:=
+ \sqrt5\left(\frac{2(1.456)}{9\pi^2}\right)^{1/3}
+ \frac{4\pi^{2/3}}{\sqrt{15}}
+ =1.585436982049326\ldots .
 \end{equation}
-Thus, at the mean--field level, the coefficient available to the $s=3$ weighted method improves from approximately $1.1184$ to approximately $1.08633$.
+This is the constant appearing in the HPS cubic-weight kinetic estimate.  Their equations (7.20)--(7.21), combined with their weighted kinetic bound, imply the following inequality for every binding $N$-electron state and every $0<r\le1/2$:
+\begin{equation}\label{eq:hps-transfer}
+ (1-r^2)N\beta_3-\frac1r
+ \le
+ \left(1+\frac{r^2}{5}+\frac{r^3}{35}\right)
+ \left(Z+c_0ZN^{-2/3}\right).
+\end{equation}
 
-This statement should be distinguished from a fully propagated finite--$Z$ atomic theorem.  HPS compare $\alpha_{N,3}$ with $\beta_3$ through quantitative smearing estimates and then combine that comparison with weighted kinetic--energy bounds.  Replacing the lower estimate for $\beta_3$ by its exact value improves the input to those arguments, but the optimal explicit lower--order term must be recomputed from the complete finite--$N$ inequalities.  We therefore record the following consequence in the form needed for such a recomputation.
+\begin{proposition}[Reoptimized HPS finite--$N$ inequality]\label{prop:finite-N}
+Assume $Z\ge4$ and that $N$ electrons bind to a nucleus of charge $Z$.  If $N>\beta_3^{-1}Z$, then
+\begin{align}
+N\beta_3\le{}&
+ Z+3\left(\frac3{10}\right)^{1/3}(N\beta_3)^{1/3}
+ +c_0ZN^{-2/3} \notag\\
+&+\frac1{84}
+ +\frac{c_0}{5}\left(\frac5{12}\right)^{2/3}
+   \beta_3^{2/3}Z^{-1/3}
+ +\frac{c_0\beta_3^{2/3}}{84}Z^{-2/3}.
+\label{eq:finite-N-reoptimized}
+\end{align}
+\end{proposition}
 
-\begin{corollary}[Exact mean--field input]\label{cor:hps-input}
-Every finite--$N$ estimate in the HPS $s=3$ argument that depends monotonically on the mean--field constant $\beta_3$ may use the exact value
+\begin{proof}
+Following \cite[Section 7.3]{HPS2025}, put
 \[
- \beta_3=0.9205346822904167\ldots
+ r=\lambda(N\beta_3)^{-1/3}.
 \]
-in place of the pointwise lower bound $0.8941074569\ldots$.
-\end{corollary}
+Since we are in the nontrivial case $N>\beta_3^{-1}Z$, we have $N>Z\ge4$.  Hence the restriction $r\le1/2$ required in \eqref{eq:hps-transfer} is satisfied for the optimizing value below; indeed HPS reduce this condition to
+\[
+ N>\frac{10}{3\beta_3},
+\]
+and the right--hand side is $3.62\ldots$.
 
-The improvement has a structural interpretation.  The pointwise estimate minimizes
+Expanding \eqref{eq:hps-transfer}, using $Z<N\beta_3$, and collecting the terms of order $(N\beta_3)^{1/3}$ gives
+\begin{align}
+N\beta_3\le{}&
+ Z+\left(\lambda^{-1}+\frac65\lambda^2\right)(N\beta_3)^{1/3}
+ +c_0ZN^{-2/3} \notag\\
+&+\frac{\lambda^3}{35}
+ +\frac{c_0\lambda^2}{5}\beta_3^{1/3}N^{-1/3}
+ +\frac{c_0\lambda^3}{35}N^{-2/3}.
+\label{eq:lambda-bound}
+\end{align}
+The leading correction is minimized by
+\[
+ \lambda=\left(\frac5{12}\right)^{1/3},
+ \qquad
+ \lambda^{-1}+\frac65\lambda^2
+ =3\left(\frac3{10}\right)^{1/3},
+\]
+and $\lambda^3/35=1/84$.  Thus
+\begin{align}
+N\beta_3\le{}&
+ Z+3\left(\frac3{10}\right)^{1/3}(N\beta_3)^{1/3}
+ +c_0ZN^{-2/3} \notag\\
+&+\frac1{84}
+ +\frac{c_0}{5}\left(\frac5{12}\right)^{2/3}
+   \beta_3^{1/3}N^{-1/3}
+ +\frac{c_0}{84}N^{-2/3}.
+\label{eq:pre-Z}
+\end{align}
+Finally $N>\beta_3^{-1}Z$ implies
+\[
+ N^{-1/3}<\beta_3^{1/3}Z^{-1/3},
+ \qquad
+ N^{-2/3}<\beta_3^{2/3}Z^{-2/3},
+\]
+which yields \eqref{eq:finite-N-reoptimized}.
+\end{proof}
+
+We now convert \eqref{eq:finite-N-reoptimized} into an explicit bound for $N$.  Define
+\begin{align}
+ \bar a_2&:=\frac{\beta_3^{-1}}{84},
+ \label{eq:a2bar}\\
+ \bar a_3&:=
+ \frac{c_0}{5}\left(\frac5{12}\right)^{2/3}\beta_3^{-1/3},
+ \label{eq:a3bar}\\
+ \bar a_4&:=\frac{c_0}{84}\beta_3^{-1/3}.
+ \label{eq:a4bar}
+\end{align}
+Using \Cref{thm:main} gives
+\begin{equation}\label{eq:lower-coefficients}
+ \bar a_2=0.01293244256\ldots,\qquad
+ \bar a_3=0.18184084198\ldots,\qquad
+ \bar a_4=0.01940243839\ldots.
+\end{equation}
+
+The coefficient of $Z^{1/3}$ requires a small endpoint check.  Put $x=N/Z$ and
+\begin{equation}\label{eq:Fbeta}
+ F_{\beta_3}(x):=
+ 3\left(\frac3{10}\right)^{1/3}\beta_3^{-2/3}x^{1/3}
+ +c_0\beta_3^{-1}x^{-2/3}.
+\end{equation}
+In the nontrivial case $N>\beta_3^{-1}Z$, Lieb's bound $N<2Z+1$ and $Z\ge4$ give
+\begin{equation}\label{eq:x-interval}
+ \beta_3^{-1}<x<2+\frac1Z\le\frac94.
+\end{equation}
+Moreover
+\[
+ F'_{\beta_3}(x)
+ =
+ \frac{x^{-5/3}}{3}
+ \left[
+ 3\left(\frac3{10}\right)^{1/3}\beta_3^{-2/3}x
+ -2c_0\beta_3^{-1}
+ \right],
+\]
+so $F_{\beta_3}$ has at most one critical point, and that critical point is a minimum.  Therefore its maximum on the interval in \eqref{eq:x-interval} occurs at an endpoint.  Direct evaluation from the exact value \eqref{eq:beta-exact} gives
+\begin{align}
+ F_{\beta_3}(\beta_3^{-1})
+ &=
+ 3\left(\frac3{10}\right)^{1/3}\beta_3^{-1}
+ +c_0\beta_3^{-1/3}
+ \notag\\
+ &=3.81147042506\ldots,
+ \label{eq:Fleft}\\
+ F_{\beta_3}(9/4)&=3.78401155302\ldots.
+ \label{eq:Fright}
+\end{align}
+Hence
+\begin{equation}\label{eq:Fsup}
+ \sup_{\beta_3^{-1}\le x\le9/4}F_{\beta_3}(x)
+ =3.81147042506\ldots<3.812.
+\end{equation}
+
+\begin{proof}[Proof of \Cref{thm:finite-Z}]
+If $N\le\beta_3^{-1}Z$, there is nothing to prove.  Otherwise \Cref{prop:finite-N} applies.  Suppose, for contradiction, that
+\begin{align}
+N\ge{}&
+ \beta_3^{-1}Z+3.812\,Z^{1/3}+0.01294
+ \notag\\
+&+0.18185\,Z^{-1/3}+0.01941\,Z^{-2/3}.
+\label{eq:contradiction-assumption}
+\end{align}
+Multiplying by $\beta_3$ and comparing with \eqref{eq:finite-N-reoptimized}, while using
+\[
+ 0.01294>\bar a_2,\qquad
+ 0.18185>\bar a_3,\qquad
+ 0.01941>\bar a_4,
+\]
+forces
+\[
+ 3.812\le F_{\beta_3}(N/Z),
+\]
+contrary to \eqref{eq:Fsup}.  This proves \eqref{eq:finite-Z-main}.
+
+For the simpler form, note first that
+\[
+ \beta_3^{-1}=1.08632517518\ldots<1.086326.
+\]
+For $Z\ge4$,
+\begin{align*}
+&0.01294+0.18185Z^{-1/3}+0.01941Z^{-2/3}\\
+&\qquad\le
+ \left(
+ 0.01294\,4^{-1/3}
+ +0.18185\,4^{-2/3}
+ +0.01941/4
+ \right)Z^{1/3}\\
+&\qquad<
+ 0.08518\,Z^{1/3}.
+\end{align*}
+Since $3.812+0.08518<3.90$, \eqref{eq:finite-Z-simple} follows.
+\end{proof}
+
+\begin{remark}[Scale of the finite--$N$ loss]\label{rem:finite-N-scale}
+The choice $r\asymp(N\beta_3)^{-1/3}$ balances the $r^{-1}$ smearing error against the $Nr^2$ loss.  After division by the leading $N$ scale this is an $N^{-2/3}$ effect; when the estimate is converted back to the atomic particle number, it produces the $Z^{1/3}$ correction.  Thus the exact evaluation of $\beta_3$ changes the leading linear coefficient, while the HPS mechanism retains the same $Z^{1/3}$ lower--order scale.
+\end{remark}
+
+The structural interpretation of the improvement is unchanged.  The old pointwise estimate minimizes
 \[
  g(t)=\frac{1+t^3}{1+t^2}
 \]
-for a single pair of radii.  It therefore permits every pair in the measure to realize the same worst ratio.  The exact optimizer shows that the true global compromise is a log--radial density
+for a single pair of radii and therefore allows every pair to realize the same worst ratio.  The exact optimizer instead enforces the global probability constraint and has log--radial density
 \[
  \rho_*(r)\propto r^{-4}\cos(\sqrt2\log r)
 \]
-on a finite annulus.  The resulting constant is strictly larger because the pairwise worst geometry cannot be realized simultaneously by a probability measure.
-
-It is also useful to compare with the numerical trial family $\rho(r)\propto r^{-p}$ on a finite annulus considered in the HPS analysis.  The exact extremizer is centered on the critical power $p=4$ but acquires the log--oscillatory cosine factor forced by the Euler--Lagrange equation.  This explains why the simple $p\approx4$ family is already numerically close to the true value while remaining strictly nonoptimal.
+on a finite annulus.  The resulting value of $\beta_3$ is strictly larger because the pairwise worst geometry cannot be realized simultaneously by a probability measure.

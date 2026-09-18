@@ -23,7 +23,7 @@
 \newcommand{\betaHPS}{\beta_{3}}
 \newcommand{\kernel}{k}
 
-\title{An Exact Radial Mean--Field Constant and a Sharpened\\Atomic Excess--Charge Bound}
+\title{The Exact Cubic Mean--Field Constant and an Explicit\\Atomic Excess--Charge Bound}
 \author{Hu Suiye}
 \date{September 2026}
 
@@ -35,7 +35,7 @@ Hundertmark, Pattakos and Schulz introduced a mean--field constant $\beta_s$ in 
 \[
  k(t)=\ee^{-|t|}-\ee^{-2|t|}.
 \]
-The unique normalized radial maximizer is supported on a finite interval and has cosine density.  Writing
+The normalized maximizer of the radial logarithmic problem is unique, is supported on a finite interval, and has cosine density.  Writing
 \[
  a_*:=\frac{1}{\sqrt2}\arctan\sqrt2,
 \]
@@ -45,7 +45,7 @@ we obtain
  \beta_3=\frac{3\ee^{2a_*}}{1+3\ee^{2a_*}}
  =0.9205346822904167\ldots}
 \]
-and hence $\beta_3^{-1}=1.086325175181735\ldots$.  We then reinsert this exact constant into the finite--$N$ smearing and weighted kinetic estimates of Hundertmark--Pattakos--Schulz.  For every $Z\ge4$ this gives the explicit finite--$Z$ bound
+and hence $\beta_3^{-1}=1.086325175181735\ldots$.  We then propagate this exact constant through the symbolic finite--$N$ smearing and weighted kinetic estimates of Hundertmark--Pattakos--Schulz, without introducing a new many--body inequality.  For every $Z\ge4$ this gives the explicit finite--$Z$ bound
 \[
 \begin{split}
 N_c(Z)<{}&\beta_3^{-1}Z+3.812\,Z^{1/3}+0.01294\\
@@ -56,7 +56,7 @@ and in particular
 \[
  N_c(Z)<1.086326\,Z+3.90\,Z^{1/3}.
 \]
-The radial proof uses an exact obstacle condition, compactness of maximizing sequences, endpoint smooth pasting, and a conditional negative--definiteness argument based on a Poincar\'e estimate.  The finite--$Z$ propagation uses the HPS finite--configuration estimate with the exact $\beta_3$ and a sharpened endpoint check for $N/Z$ valid when $Z\ge4$.
+At the level of the leading linear coefficient, this improves the HPS value $1.1185$ to $1.086326$ and removes about $27\%$ of the gap between the HPS coefficient and the conjectural coefficient $1$, while leaving the many--body estimates unchanged.  The explicit extremizer also identifies the radial geometry responsible for the remaining cubic mean--field loss: a compactly supported cosine modulation of the critical $r^{-4}$ profile in logarithmic radius.  Thus the result both sharpens the quantitative excess--charge bound within the HPS cubic framework and isolates which part of the remaining obstruction cannot be removed by scalar radial mean--field optimization alone.
 \end{abstract}
 
 \input{chapter/01_introduction}

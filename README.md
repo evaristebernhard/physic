@@ -1,6 +1,6 @@
-# Exact beta_3 and finite-Z excess-charge bound
+# Exact cubic mean-field constant and finite-Z excess-charge bound
 
-Research draft on the exact radial mean-field constant beta_3 arising in the Hundertmark–Pattakos–Schulz (HPS) excess-charge framework, together with its explicit finite-N / finite-Z propagation.
+Research draft evaluating the HPS cubic mean-field constant beta_3 exactly and propagating that value through the existing finite-N framework to an explicit finite-Z atomic excess-charge bound.
 
 ## Structure
 
@@ -11,10 +11,10 @@ Research draft on the exact radial mean-field constant beta_3 arising in the Hun
 - chapter/04_extremizer.tex — explicit cosine extremizer and obstacle factorization
 - chapter/05_global_optimality.tex — atomlessness, endpoint identities, conditional negativity, global proof
 - chapter/06_atomic_consequence.tex — HPS finite-N propagation and the sharpened finite-Z theorem
-- chapter/07_outlook.tex — route toward Pauli/Hardy stability improvements beyond the cubic mean-field obstruction
+- chapter/07_outlook.tex — scope of the present result and what would be required to go beyond the cubic mean-field obstruction
 - chapter/A_proof_audit.tex — audit of the delicate radial and finite-N steps
 - references.bib — bibliography
-- verify_constants.py — numerical audit of the closed finite-Z constants
+- verify_constants.py — interval-arithmetic certification of the rounded finite-Z constants
 
 ## Exact mean-field constant
 
@@ -52,6 +52,15 @@ The a1 audit uses the sharper consequence of Lieb's bound valid for Z >= 4,
 
 and checks both endpoints of the HPS optimization function. This avoids an artificial endpoint loss that appears if the interval is unnecessarily enlarged to 5/2.
 
+## Constant audit
+
+The rounded constants used in the theorem are checked with interval arithmetic:
+
+    python -m pip install mpmath
+    python verify_constants.py
+
+The script is a reproducibility check; the analytic proof is in the LaTeX chapters.
+
 ## Compile
 
     pdflatex main.tex
@@ -59,4 +68,4 @@ and checks both endpoints of the HPS optimization function. This avoids an artif
     pdflatex main.tex
     pdflatex main.tex
 
-Working branch: fix/finite-N-excess-charge
+Polish branch: polish/exact-beta3-finite-z

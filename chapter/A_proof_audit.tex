@@ -103,7 +103,7 @@ For the present theorem $Z\ge4$.  Lieb's bound gives
 \[
  x<2+\frac1Z\le\frac94,
 \]
-so the relevant interval is $[\beta_3^{-1},9/4]$.  Directed evaluation of the explicit expressions gives
+so the relevant interval is $[\beta_3^{-1},9/4]$.  Interval evaluation of the explicit closed expressions gives
 \[
  F_{\beta_3}(\beta_3^{-1})
  =3.81147042506\ldots,
@@ -117,7 +117,7 @@ This sharper interval is important for the numerical audit.  If one unnecessaril
 
 \subsection{Certified decimal margins}
 
-All decimals in \Cref{thm:finite-Z} are chosen strictly on the safe side of explicit closed expressions:
+All decimals in \Cref{thm:finite-Z} are chosen strictly on the safe side of explicit closed expressions.  The repository script \texttt{verify\_constants.py} evaluates the formulas with interval arithmetic, so the inequalities below do not rely on ordinary floating-point rounding:
 \[
  \beta_3^{-1}=1.08632517518\ldots<1.086326,
 \]
@@ -130,7 +130,7 @@ All decimals in \Cref{thm:finite-Z} are chosen strictly on the safe side of expl
  \qquad
  \sup F_{\beta_3}=3.81147042506\ldots<3.812.
 \]
-These are evaluations of elementary explicit formulas involving $\exp$, $\arctan$, radicals and $\pi$; no numerical optimization enters the theorem.
+These are evaluations of elementary explicit formulas involving $\exp$, $\arctan$, radicals and $\pi$; no numerical optimization enters the theorem.  The interval script is only a reproducibility check for the displayed decimal margins; the analytic proof is contained in the preceding sections.
 
 \subsection{What is not claimed}
 

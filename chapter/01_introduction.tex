@@ -48,7 +48,7 @@ and has spatial density proportional to
 Among radial admissible measures, the minimizer is unique up to the scaling invariance of \eqref{eq:def-beta-s}.  No uniqueness assertion is made here for minimizers in the full nonradial HPS class.
 \end{theorem}
 
-The second purpose is to propagate \Cref{thm:main} through the finite--$N$ part of the HPS argument.  Their estimates in the cubic-weight case are formulated in terms of the actual mean--field constant $\beta_3$; the pointwise lower bound enters only when the final coefficients are numericalized.  Repeating that last optimization with \eqref{eq:beta-exact} gives a genuine finite--$Z$ theorem.
+The second purpose is to propagate \Cref{thm:main} through the finite--$N$ part of the HPS argument.  Their cubic-weight estimates retain the actual mean--field constant $\beta_3$ symbolically; the pointwise lower bound enters only when the final coefficients are converted to explicit numbers.  Thus the present finite--$Z$ improvement is not obtained by replacing a decimal in the final HPS theorem: it comes from inserting the exact value \eqref{eq:beta-exact} into their symbolic chain and redoing the endpoint optimization.
 
 \begin{theorem}[Sharpened finite--$Z$ excess--charge bound]\label{thm:finite-Z}
 For every $Z\ge4$,
@@ -64,13 +64,29 @@ where $\beta_3$ is the exact constant in \eqref{eq:beta-exact}.  Consequently,
 \end{equation}
 \end{theorem}
 
+\subsection*{Significance of the result}
+
+The improvement has a direct quantitative meaning.  The HPS leading coefficient $1.1185$ is produced by a lower estimate on the cubic mean--field constant, whereas the present computation replaces that estimate by the exact radial value.  The leading coefficient therefore drops to
+\[
+ 1.086325175\ldots .
+\]
+Relative to the conjectural coefficient $1$, the distance from the HPS value is $0.1185$, while the exact radial computation removes
+\[
+ 1.1185-1.086325175\ldots=0.032174824\ldots,
+\]
+or about $27\%$ of that leading-order gap.  This comparison is only about the linear coefficient; the $Z^{1/3}$ correction remains part of the finite--$Z$ theorem.  The point is that this gain is obtained without a new many--body inequality.  It isolates the amount of the HPS loss that came specifically from replacing a global mean--field optimization by a pointwise pairwise bound.
+
+There is also a structural meaning.  The pointwise HPS estimate asks for the worst ratio associated with one pair of radii, but a probability measure cannot make every pair simultaneously realize that worst geometry.  Solving the full variational problem enforces this global compatibility.  The optimizer is not a singular pair configuration: it is an extended density supported on a finite annulus, with the explicit log--radial cosine profile in \Cref{thm:main}.  Thus the improvement is a genuinely collective effect inside the scalar radial mean--field problem.
+
+Finally, the extremizer identifies the obstruction that remains after the scalar radial problem is solved exactly.  In physical radius the density is a compactly supported cosine modulation of $r^{-4}$, the critical power already suggested by the cubic weighted multiplier structure.  Consequently, any further reduction of the leading coefficient within a strengthened cubic-weight argument must use information not present in the scalar radial probability measure alone---for example fermionic occupation constraints or positive terms that are discarded in the purely mean--field reduction.  The exact profile therefore provides a concrete reference state for future stability estimates around the radial obstruction.
+
 The proof of \Cref{thm:main} has three main steps.  First, Newton's theorem and the logarithmic change of variables $t=\log r$ transform the radial minimization into a one--dimensional maximization problem for the kernel
 \[
  k(t)=\ee^{-|t|}-\ee^{-2|t|}.
 \]
 Second, the Euler--Lagrange obstacle condition determines a compactly supported cosine profile.  Third, a conditional negative--definiteness estimate on the extremal support rules out all competing radial maximizers.  The last step is where the exact solution becomes global within the radial problem rather than merely stationary.
 
-The finite--$Z$ step does not introduce a new many--body estimate.  Instead, it keeps the HPS finite--configuration and weighted kinetic inequalities unchanged and replaces only the former lower estimate for $\beta_3$ by its exact value.  One small endpoint issue must be handled explicitly: for $Z\ge4$, Lieb's bound gives
+The finite--$Z$ step deliberately keeps the HPS finite--configuration and weighted kinetic inequalities unchanged.  The new input is the exact solution of the mean--field variational problem, together with a finite--$Z$ reoptimization that tracks the admissible interval for $N/Z$.  One small endpoint issue must be handled explicitly: for $Z\ge4$, Lieb's bound gives
 \[
  \frac NZ<2+\frac1Z\le\frac94,
 \]
@@ -78,4 +94,4 @@ which is sharper than the coarser interval used in the original numerical optimi
 
 The resulting extremal profile also clarifies a numerical feature already visible in HPS: radial trial densities close to $|x|^{-4}$ are nearly optimal.  In logarithmic radius, the exact extremizer is a compactly supported cosine perturbation of precisely that critical power law.
 
-The paper is organized as follows.  \Cref{sec:radial} records the radial reduction.  \Cref{sec:log} introduces the logarithmic variational problem.  \Cref{sec:extremizer} constructs the candidate maximizer and proves its obstacle condition.  \Cref{sec:global} proves global optimality for the radial problem.  \Cref{sec:atomic} propagates the exact constant through the HPS finite--$N$ argument and proves \Cref{thm:finite-Z}.  \Cref{sec:outlook} discusses possible improvements beyond the cubic mean--field obstruction.  The appendix isolates the technical points that are most sensitive in a formal proof audit.
+The paper is organized as follows.  \Cref{sec:radial} records the radial reduction.  \Cref{sec:log} introduces the logarithmic variational problem.  \Cref{sec:extremizer} constructs the candidate maximizer and proves its obstacle condition.  \Cref{sec:global} proves global optimality for the radial problem.  \Cref{sec:atomic} propagates the exact constant through the HPS finite--$N$ argument and proves \Cref{thm:finite-Z}.  \Cref{sec:outlook} discusses the significance and limitations of the result and the information required for improvements beyond the cubic mean--field obstruction.  The appendix isolates the technical points that are most sensitive in a formal proof audit.

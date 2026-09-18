@@ -7,13 +7,13 @@ We now propagate the exact value of $\beta_3$ through the finite--configuration 
 is used only when the final coefficients are converted into explicit decimals.  Thus \Cref{thm:main} can be inserted without changing the finite--$N$ smearing argument or the weighted kinetic estimate.
 
 Set
-\begin{equation}\label{eq:c-hps}
+\[
  c_0:=
  \sqrt5\left(\frac{2(1.456)}{9\pi^2}\right)^{1/3}
  \frac{4\pi^{2/3}}{\sqrt{15}}
  =1.585436982049326\ldots .
-\end{equation}
-This is the constant appearing in the HPS cubic-weight kinetic estimate.  Their equations (7.20)--(7.21), combined with their weighted kinetic bound, imply the following inequality for every binding $N$-electron state and every $0<r\le1/2$:
+\]
+This is the constant appearing in the HPS cubic-weight kinetic estimate.  The finite--configuration and weighted kinetic estimates in \cite[Sec.~7.3]{HPS2025} imply the following inequality for every binding $N$-electron state and every $0<r\le1/2$:
 \begin{equation}\label{eq:hps-transfer}
  (1-r^2)N\beta_3-\frac1r
  \le
@@ -47,15 +47,14 @@ Since we are in the nontrivial case $N>\beta_3^{-1}Z$, we have $N>Z\ge4$.  Hence
 and the right--hand side is $3.62\ldots$.
 
 Expanding \eqref{eq:hps-transfer}, using $Z<N\beta_3$, and collecting the terms of order $(N\beta_3)^{1/3}$ gives
-\begin{align}
+\begin{align*}
 N\beta_3\le{}&
  Z+\left(\lambda^{-1}+\frac65\lambda^2\right)(N\beta_3)^{1/3}
- +c_0ZN^{-2/3} \notag\\
+ +c_0ZN^{-2/3} \\
 &+\frac{\lambda^3}{35}
  +\frac{c_0\lambda^2}{5}\beta_3^{1/3}N^{-1/3}
  +\frac{c_0\lambda^3}{35}N^{-2/3}.
-\label{eq:lambda-bound}
-\end{align}
+\end{align*}
 The leading correction is minimized by
 \[
  \lambda=\left(\frac5{12}\right)^{1/3},
@@ -64,16 +63,15 @@ The leading correction is minimized by
  =3\left(\frac3{10}\right)^{1/3},
 \]
 and $\lambda^3/35=1/84$.  Thus
-\begin{align}
+\begin{align*}
 N\beta_3\le{}&
  Z+3\left(\frac3{10}\right)^{1/3}(N\beta_3)^{1/3}
- +c_0ZN^{-2/3} \notag\\
+ +c_0ZN^{-2/3} \\
 &+\frac1{84}
  +\frac{c_0}{5}\left(\frac5{12}\right)^{2/3}
    \beta_3^{1/3}N^{-1/3}
  +\frac{c_0}{84}N^{-2/3}.
-\label{eq:pre-Z}
-\end{align}
+\end{align*}
 Finally $N>\beta_3^{-1}Z$ implies
 \[
  N^{-1/3}<\beta_3^{1/3}Z^{-1/3},
@@ -84,28 +82,25 @@ which yields \eqref{eq:finite-N-reoptimized}.
 \end{proof}
 
 We now convert \eqref{eq:finite-N-reoptimized} into an explicit bound for $N$.  Define
-\begin{align}
- \bar a_2&:=\frac{\beta_3^{-1}}{84},
- \label{eq:a2bar}\\
+\begin{align*}
+ \bar a_2&:=\frac{\beta_3^{-1}}{84},\\
  \bar a_3&:=
- \frac{c_0}{5}\left(\frac5{12}\right)^{2/3}\beta_3^{-1/3},
- \label{eq:a3bar}\\
+ \frac{c_0}{5}\left(\frac5{12}\right)^{2/3}\beta_3^{-1/3},\\
  \bar a_4&:=\frac{c_0}{84}\beta_3^{-1/3}.
- \label{eq:a4bar}
-\end{align}
+\end{align*}
 Using \Cref{thm:main} gives
-\begin{equation}\label{eq:lower-coefficients}
+\[
  \bar a_2=0.01293244256\ldots,\qquad
  \bar a_3=0.18184084198\ldots,\qquad
  \bar a_4=0.01940243839\ldots.
-\end{equation}
+\]
 
 The coefficient of $Z^{1/3}$ requires a small endpoint check.  Put $x=N/Z$ and
-\begin{equation}\label{eq:Fbeta}
+\[
  F_{\beta_3}(x):=
  3\left(\frac3{10}\right)^{1/3}\beta_3^{-2/3}x^{1/3}
  +c_0\beta_3^{-1}x^{-2/3}.
-\end{equation}
+\]
 In the nontrivial case $N>\beta_3^{-1}Z$, Lieb's bound $N<2Z+1$ and $Z\ge4$ give
 \begin{equation}\label{eq:x-interval}
  \beta_3^{-1}<x<2+\frac1Z\le\frac94.
@@ -121,17 +116,15 @@ Moreover
  \right],
 \]
 so $F_{\beta_3}$ has at most one critical point, and that critical point is a minimum.  Therefore its maximum on the interval in \eqref{eq:x-interval} occurs at an endpoint.  Interval evaluation of the explicit expressions obtained from \eqref{eq:beta-exact} gives
-\begin{align}
+\begin{align*}
  F_{\beta_3}(\beta_3^{-1})
  &=
  3\left(\frac3{10}\right)^{1/3}\beta_3^{-1}
  +c_0\beta_3^{-1/3}
  \notag\\
- &=3.81147042506\ldots,
- \label{eq:Fleft}\\
+ &=3.81147042506\ldots,\\
  F_{\beta_3}(9/4)&=3.78401155302\ldots.
- \label{eq:Fright}
-\end{align}
+\end{align*}
 Hence
 \begin{equation}\label{eq:Fsup}
  \sup_{\beta_3^{-1}\le x\le9/4}F_{\beta_3}(x)
@@ -140,13 +133,11 @@ Hence
 
 \begin{proof}[Proof of \Cref{thm:finite-Z}]
 If $N\le\beta_3^{-1}Z$, there is nothing to prove.  Otherwise \Cref{prop:finite-N} applies.  Suppose, for contradiction, that
-\begin{align}
+\begin{align*}
 N\ge{}&
- \beta_3^{-1}Z+3.812\,Z^{1/3}+0.01294
- \notag\\
+ \beta_3^{-1}Z+3.812\,Z^{1/3}+0.01294\\
 &+0.18185\,Z^{-1/3}+0.01941\,Z^{-2/3}.
-\label{eq:contradiction-assumption}
-\end{align}
+\end{align*}
 Multiplying by $\beta_3$ and comparing with \eqref{eq:finite-N-reoptimized}, while using
 \[
  0.01294>\bar a_2,\qquad
@@ -178,7 +169,7 @@ For $Z\ge4$,
 Since $3.812+0.08518<3.90$, \eqref{eq:finite-Z-simple} follows.
 \end{proof}
 
-\begin{remark}[Scale of the finite--$N$ loss]\label{rem:finite-N-scale}
+\begin{remark}[Scale of the finite--$N$ loss]
 The choice $r\asymp(N\beta_3)^{-1/3}$ balances the $r^{-1}$ smearing error against the $Nr^2$ loss.  After division by the leading $N$ scale this is an $N^{-2/3}$ effect; when the estimate is converted back to the atomic particle number, it produces the $Z^{1/3}$ correction.  Thus the exact evaluation of $\beta_3$ changes the leading linear coefficient, while the HPS mechanism retains the same $Z^{1/3}$ lower--order scale.
 \end{remark}
 

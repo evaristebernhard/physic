@@ -10,7 +10,7 @@ Let $\sigma$ be a normalized maximizer, let
 \]
 and set $K:=k*\sigma$.
 
-\begin{lemma}[Compact support and absence of atoms]\label{lem:compact-atomless}
+\begin{lemma}[Compact support and absence of atoms]
 Every normalized maximizer has compact support and is atomless.
 \end{lemma}
 
@@ -120,9 +120,9 @@ with equality only for $\eta=0$.
 
 \begin{proof}
 Define
-\begin{equation}\label{eq:p-def}
+\[
  p(t):=\int\ee^{|t-u|}\,\dd\eta(u).
-\end{equation}
+\]
 For $t\ge a_*$ the first condition in \eqref{eq:eta-moments} after reversing the sign of the exponent gives
 \[
  p(t)=\ee^t\int\ee^{-u}\,\dd\eta(u)=0,
@@ -161,10 +161,10 @@ Poincar\'e's inequality on an interval of length $2a_*$ yields
  \ge\frac{\pi^2}{(2a_*)^2}\|p\|_2^2.
 \]
 Since
-\begin{equation}\label{eq:length-threshold}
+\[
  2a_*=1.3510217177\ldots
- <\frac{\pi}{\sqrt5}=1.4049629462\ldots,
-\end{equation}
+ <\frac{\pi}{\sqrt5}=1.4049629462\ldots.
+\]
 we have $\pi^2/(2a_*)^2>5$, proving \eqref{eq:Jeta-negative}.  Equality forces $p=0$, and then \eqref{eq:p-eta} gives $\eta=0$.
 \end{proof}
 

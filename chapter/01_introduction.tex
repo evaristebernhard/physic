@@ -1,8 +1,20 @@
 \section{Introduction}
 
-The excess--charge problem asks how many electrons an atomic nucleus of charge $Z$ can bind.  In the nonrelativistic Schr\"odinger model one expects only a bounded number of excess electrons, independently of $Z$.  A classical theorem of Lieb gives $N_c(Z)<2Z+1$ \cite{Lieb1984}; Nam later improved the coefficient to $1.22$ with an explicit $O(Z^{1/3})$ correction \cite{Nam2012}.  The conjectural bound remains $N_c(Z)\le Z+C$ for a universal constant $C$; see, for example, \cite{Nam2013Review}.
+The excess--charge problem asks how many electrons an atomic nucleus of charge $Z$ can bind.  In the nonrelativistic many--electron Schr\"odinger model, the ionization conjecture predicts that only a uniformly bounded number of electrons can be bound in excess of neutrality,
+\[
+ N_c(Z)\le Z+C
+\]
+with a universal constant $C$.  This remains open for the full Schr\"odinger problem; see the reviews \cite{Nam2013Review,Nam2022Review}.  The conjecture is known in important approximation models, including Hartree--Fock theory \cite{Solovej2003}, but not for the exact Coulomb Hamiltonian.
 
-A recent refinement by Hundertmark, Pattakos and Schulz (HPS) develops the weighted multiplier method substantially further and proves
+The rigorous history has both asymptotic and finite--$Z$ strands.  Early work of Ruskai and Sigal established nonexistence of bound states for sufficiently highly charged negative ions \cite{Ruskai1982,Sigal1982}.  Lieb, Sigal, Simon and Thirring later proved asymptotic neutrality, $N_c(Z)/Z\to1$ as $Z\to\infty$ \cite{LSST1988}; quantitative large--$Z$ refinements were obtained by Fefferman--Seco and by Seco--Sigal--Solovej \cite{FeffermanSeco1990,SecoSigalSolovej1990}.  These asymptotic results do not by themselves give a sharp uniform finite--$Z$ estimate.
+
+For arbitrary finite $Z$, Lieb proved the classical non--asymptotic bound $N_c(Z)<2Z+1$ \cite{Lieb1984}.  Nam later improved this to
+\[
+ N_c(Z)<1.22\,Z+3Z^{1/3},
+\]
+for fermionic atoms \cite{Nam2012}.
+
+A recent refinement by Hundertmark, Pattakos and Schulz (HPS) develops this weighted multiplier strategy substantially further and proves
 \[
  N_c(Z)<1.1185\,Z+O(Z^{1/3}),
 \]

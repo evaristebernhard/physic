@@ -52,14 +52,14 @@ The a1 audit uses the sharper consequence of Lieb's bound valid for Z >= 4,
 
 and checks both endpoints of the HPS optimization function. This avoids an artificial endpoint loss that appears if the interval is unnecessarily enlarged to 5/2.
 
-## Constant audit
+## Reproducibility and LaTeX audit
 
-The rounded constants used in the theorem are checked with interval arithmetic:
+The rounded constants are checked with interval arithmetic, and the manuscript has a dependency-free cross-reference/numbering audit:
 
     python -m pip install mpmath
-    python verify_constants.py
+    make check
 
-The script is a reproducibility check; the analytic proof is in the LaTeX chapters.
+The checks reject duplicate or undefined labels, unused equation labels, numbered displays without labels, hard-coded equation-number references, missing citation keys, and loss of section-based equation numbering. The scripts are reproducibility checks; the analytic proof is in the LaTeX chapters.
 
 ## Compile
 

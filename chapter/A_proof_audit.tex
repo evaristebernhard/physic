@@ -1,6 +1,6 @@
 \section{Proof audit and technical checkpoints}\label{app:audit}
 
-This appendix records the points at which a formal Euler--Lagrange calculation can fail and explains how they are handled in the proof above.  It is included deliberately: the exact numerical value of $\beta_3$ is meaningful only if the variational argument is genuinely global.
+This appendix records the points at which a formal variational or finite--$N$ calculation can fail and explains how they are handled in the proof above.  It is included deliberately: the exact numerical value of $\beta_3$ is meaningful only if the radial variational argument is genuinely global, and the improved atomic coefficient is meaningful only if the finite--$N$ propagation is numerically safe.
 
 \subsection{Enlarging the HPS admissible class}
 
@@ -66,8 +66,72 @@ No connectedness assumption on $\supp\sigma$ is made.  We define only its extrem
 
 \subsection{Scope of the uniqueness statement}
 
-The proof of \Cref{thm:main} shows that the normalized maximizer of the logarithmic radial problem is unique, and hence that the radial minimizer is unique up to dilation.  HPS radialization at $s=3$ proves equality between the full and radial infima, but the radialization inequality is not used here in a strict form.  Consequently the present note does not claim that every minimizer in the full nonradial HPS admissible class must itself be radial.
+The proof of \Cref{thm:main} shows that the normalized maximizer of the logarithmic radial problem is unique, and hence that the radial minimizer is unique up to dilation.  HPS radialization at $s=3$ proves equality between the full and radial infima, but the radialization inequality is not used here in a strict form.  Consequently the present paper does not claim that every minimizer in the full nonradial HPS admissible class must itself be radial.
 
-\subsection{What is not claimed here}
+\subsection{Why the exact $\beta_3$ may be inserted into the HPS finite--$N$ argument}
 
-The exact evaluation of $\beta_3$ is a statement about the mean--field variational constant.  The present manuscript does not claim that the full finite--$Z$ HPS theorem is obtained by mechanically replacing $1.1185$ with $1.08633$.  Their finite--$N$ comparison between $\alpha_{N,3}$ and $\beta_3$, together with the weighted kinetic estimates, must be reoptimized with the exact input.  Likewise, no claim of the ionization conjecture $N_c(Z)\le Z+C$ is made here.
+The finite--$Z$ theorem is not obtained by replacing a printed decimal inside the final HPS statement.  What is used is the symbolic cubic-weight chain in \cite[Section 7.3]{HPS2025}.  In particular, their finite--configuration estimate has the form
+\[
+ (1-r^2)N\beta_3-\frac1r
+ \le
+ \left(1+\frac{r^2}{5}+\frac{r^3}{35}\right)\alpha_{N,3}(N-1),
+\]
+and their kinetic estimate bounds the right--hand side by the same factor times
+\[
+ Z+c_0ZN^{-2/3}.
+\]
+Thus the true mean--field constant $\beta_3$ remains symbolic throughout the finite--$N$ argument.  The old pointwise lower bound is used only to turn $\beta_3^{-1}$ into the decimal $1.1185$ and to produce safe decimal lower--order coefficients.  Replacing that lower estimate by the exact value from \Cref{thm:main} is therefore logically legitimate.
+
+\subsection{Endpoint check in the $Z^{1/3}$ optimization}
+
+After the lower--order coefficients are removed, the HPS contradiction argument reduces to bounding
+\[
+ F_{\beta_3}(x)
+ =
+ 3\left(\frac3{10}\right)^{1/3}\beta_3^{-2/3}x^{1/3}
+ +c_0\beta_3^{-1}x^{-2/3},
+ \qquad x=\frac NZ.
+\]
+Because
+\[
+ F'_{\beta_3}(x)
+ =\frac{x^{-5/3}}{3}(Ax-2B)
+\]
+with $A,B>0$, the function has a unique interior minimum and no interior maximum.  Hence one must compare both endpoints of the admissible interval.
+
+For the present theorem $Z\ge4$.  Lieb's bound gives
+\[
+ x<2+\frac1Z\le\frac94,
+\]
+so the relevant interval is $[\beta_3^{-1},9/4]$.  Directed evaluation of the explicit expressions gives
+\[
+ F_{\beta_3}(\beta_3^{-1})
+ =3.81147042506\ldots,
+ \qquad
+ F_{\beta_3}(9/4)
+ =3.78401155302\ldots.
+\]
+Thus the left endpoint is the true maximum on the interval used here, and the rounded coefficient $3.812$ is safe.
+
+This sharper interval is important for the numerical audit.  If one unnecessarily enlarges the interval to $[\beta_3^{-1},5/2]$, the right endpoint is slightly larger for the exact value of $\beta_3$.  The $Z\ge4$ theorem avoids that artificial loss by retaining the sharper consequence of Lieb's estimate.
+
+\subsection{Certified decimal margins}
+
+All decimals in \Cref{thm:finite-Z} are chosen strictly on the safe side of explicit closed expressions:
+\[
+ \beta_3^{-1}=1.08632517518\ldots<1.086326,
+\]
+\[
+ \bar a_2=0.01293244256\ldots<0.01294,\qquad
+ \bar a_3=0.18184084198\ldots<0.18185,
+\]
+\[
+ \bar a_4=0.01940243839\ldots<0.01941,
+ \qquad
+ \sup F_{\beta_3}=3.81147042506\ldots<3.812.
+\]
+These are evaluations of elementary explicit formulas involving $\exp$, $\arctan$, radicals and $\pi$; no numerical optimization enters the theorem.
+
+\subsection{What is not claimed}
+
+The paper proves a sharpened finite--$Z$ theorem within the existing HPS cubic-weight framework, but it does not prove the ionization conjecture $N_c(Z)\le Z+C$.  Nor does it claim that the coefficient $\beta_3^{-1}$ is optimal among all possible weighted multiplier arguments.  Any further reduction of the leading coefficient must use information not present in the scalar radial mean--field problem, for example a quantitative stability term coupled to fermionic occupation constraints.

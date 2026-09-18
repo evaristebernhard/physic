@@ -1,15 +1,21 @@
-\section{Scope and further questions}\label{sec:outlook}
+\section{Discussion, significance, and scope}\label{sec:outlook}
 
 The exact computation of $\beta_3$ and \Cref{thm:finite-Z} complete the finite--$Z$ propagation of the cubic HPS mean--field constant through the presently available finite--configuration and weighted kinetic estimates.  The two conclusions should be kept conceptually separate.  The first is an exact solution of the scalar radial mean--field variational problem.  The second is an explicit atomic bound obtained by inserting that exact constant into the existing HPS many--body framework and reoptimizing the finite--$Z$ bookkeeping.
 
-The resulting coefficient
+At leading order this changes the coefficient from $1.1185$ to
 \[
- \beta_3^{-1}=1.086325175\ldots
+ \beta_3^{-1}=1.086325175\ldots .
 \]
-is therefore the coefficient delivered by the present cubic mean--field input together with the unchanged HPS finite--$N$ estimates.  We do not claim that it is optimal among all weighted multiplier arguments, and we do not prove the ionization conjecture $N_c(Z)\le Z+C$.
+Measured against the conjectural coefficient $1$, the exact radial computation removes about $27\%$ of the gap left by the HPS leading coefficient.  This is a useful way to locate the contribution of the radial mean--field relaxation itself: no new kinetic inequality, localization estimate, or fermionic many--body input is used to obtain that reduction.  The remaining $Z^{1/3}$ correction is inherited from the finite--$N$ smearing/kinetic balance and is not eliminated by knowing $\beta_3$ exactly.
 
-The explicit extremizer nevertheless identifies the geometry responsible for the remaining scalar mean--field obstruction: in logarithmic radius it is a compactly supported cosine profile, and in physical space its density is proportional to
+The explicit extremizer gives a second, qualitative conclusion.  The old pointwise estimate optimizes the interaction of a single pair of radii.  The true mean--field problem instead asks for one probability measure whose entire pair distribution is compatible at once.  The gap between the pointwise constant and the exact $\beta_3$ therefore measures a collective compatibility effect, and the minimizing distribution is an extended annular profile rather than a degenerate pair configuration.
+
+In logarithmic radius the extremizer is a compactly supported cosine profile, while in physical space its density is proportional to
 \[
  r^{-4}\cos(\sqrt2\log r)
 \]
-on a finite annulus.  Any improvement beyond the coefficient obtained here must therefore use information that is absent from the scalar radial variational problem, for example genuinely many--fermion information or additional positive terms retained from the weighted multiplier identity.  We do not pursue such extensions in the present paper.
+on a finite annulus.  This profile identifies the geometry responsible for the remaining scalar mean--field obstruction.  It also supplies a natural reference configuration for any future quantitative stability estimate: one can ask how much extra energy is forced when an admissible state departs from this log--radial profile.
+
+The result also clarifies the limitation of the scalar approach.  The coefficient $\beta_3^{-1}>1$ is the value delivered by the cubic radial mean--field input together with the unchanged HPS finite--$N$ estimates.  We do not claim that it is optimal among all weighted multiplier arguments, and we do not prove the ionization conjecture $N_c(Z)\le Z+C$.  Any improvement beyond the coefficient obtained here within a strengthened cubic-weight framework must exploit information that disappears in the scalar radial reduction, for example genuinely many--fermion occupation constraints or additional positive terms retained from the weighted multiplier identity.
+
+Thus the role of the present paper is twofold: it sharpens the best coefficient obtainable from the specific cubic mean--field input used in HPS, and it turns the remaining obstruction into an explicit extremal geometry rather than an unspecified constant loss.  That distinction is useful both for the quantitative excess--charge problem and for deciding where a subsequent improvement has to enter.

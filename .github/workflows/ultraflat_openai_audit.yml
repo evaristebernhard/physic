@@ -55,6 +55,12 @@ jobs:
           python research/ultraflat_openai/fft_recursion.py \
             --parent-depth 5 --budgets 0.0001 0.0005 0.001 0.005 \
             --output research/ultraflat_openai/results/fft_depth6.json
+      - name: Adaptive FFT original recursion through depth seven
+        run: |
+          python research/ultraflat_openai/adaptive_fft.py \
+            --target-depth 9 --eta-start 0.005 \
+            --stage-budget 0.0005 --max-cells 35000000 \
+            --output research/ultraflat_openai/results/adaptive_depth7.json
       - uses: actions/upload-artifact@v4
         with:
           name: openai-ultraflat-section4-audit

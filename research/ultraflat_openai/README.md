@@ -360,3 +360,31 @@ works at that \(N\); its outputs must be labeled independently.
   packing, wave joining/stationary phase, and Section 6 discrepancy
   rounding have not yet been implemented. **The final N remains
   unknown**, and the current code does not claim otherwise.
+
+
+### Negative depth-eight test: simple box clipping is not a valid shortcut
+
+After computing the depth-seven 1,865,022-term truncated polynomial,
+restricting its Fourier support to smaller rectangular boxes would
+make the next dense FFT manageable, but fails the essential
+small-deletion-\(\ell^1\) requirement:
+
+| Maximum absolute frequency by coordinate | Next FFT cells | Fourier L1 mass discarded (float) |
+|---|---:|---:|
+| (6,6,5,4,2,1,1) | 50,203,125 | 1.14116 |
+| (6,6,4,4,2,1,1) | 40,640,625 | 1.17079 |
+| (5,5,4,4,2,1,1) | 28,676,025 | 1.22191 |
+| (8,8,6,5,3,1,1) | 185,810,625 | 0.94341 |
+
+Dropping even 0.94 of Fourier coefficient L1 mass is incompatible
+with the present \(10^{-3}\)-scale uniform-error budget. Thus blindly
+shrinking the frequency bounding box is not a sound depth-eight fix.
+See \`results/adaptive_fft_local_20261010.json\` for the local
+diagnostic record.
+
+The mathematical next task is not another heuristic frequency cutoff.
+It is to implement an out-of-core/blocked convolution that never needs
+to instantiate all \(\sim 2.5\) billion dense output cells, while
+retaining a certified bound on the mass actually omitted. A tensor-
+network representation may also be considered, but only if an
+\(L^\infty\) / \(\ell^1\)-level error certificate can be produced.

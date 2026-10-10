@@ -199,3 +199,164 @@ plausibly around 59 rather than the much larger conservative analytic
 upper bound. The actual bottleneck is explicitly materializing and
 spreading its enormous Fourier support. These experiments do not
 yield a value or rigorous numerical bound for final \(N_0(\varepsilon)\).
+
+
+## Fourth experiment: algorithm engineering while preserving OpenAI's interface
+
+The goal is to build a REAL executable method, not to replace the
+original ultraflat theorem by an unrelated asymptotic conjecture.
+There are three explicitly separated paths:
+
+1. **Faithful original recursion** (new \`fft_recursion.py\`,
+   \`adaptive_fft.py\`): compute the OpenAI \(p_d\) and compress
+   intermediate Fourier coefficients, with a tracked \(\ell^1\)-deletion
+   budget. This DOES use the original recursive function.
+2. **Low-rank spreading input** (\`lowrank_balance.py\`): fit a small
+   number \(J\) of quadratic-chirp directions to the equation used in
+   Proposition 4.1. The EXACT analytical \(d=2,J=2\) example verifies
+   the interface, but its energy is far below 1, and numerical \(d=3\)
+   fits are NOT certified feasible.
+3. **Independent finite-\(N\) comparator** (\`finite_n_search.py\`):
+   search actual binary sign sequences and check whole-circle
+   amplitude error. This is NOT the OpenAI proof. It provides an
+   independent baseline so that future Section 5/6 algorithms can be
+   compared with actual achieved lengths and numerical errors.
+
+### FFT original recursion
+
+Writing \(\widehat p_d(s)=b_s\), the unchanged recurrence gives
+\[
+\widehat p_{d+1}(u,\pm1)
+  =\tfrac14\left(\mathbf1_{u=0}-\sum_{s+t=u}b_sb_t\right).
+\]
+The large sum is a MULTIDIMENSIONAL convolution, accelerated by FFT.
+Unit tests cross-check against the exact rational recursion at depth
+\(3\to4\).
+
+Without earlier pruning, the exactly represented \(d=5\) polynomial
+has 18,362 Fourier entries. Computing its square requires
+18,362^2 \(\approx 337\) million naive ordered pairs, but the FFT
+convolution uses a dense array of only 1,640,925 cells. One local
+experiment recorded about 0.13 s for this FFT (not including
+preparing the depth-5 exact coefficients).
+
+**Adaptive experiment, with pruning applied at depth five first:**
+
+\`\`\`bash
+python3 research/ultraflat_openai/adaptive_fft.py \
+  --target-depth 9 --eta-start 0.005 \
+  --stage-budget 0.0005 --max-cells 35000000 \
+  --output research/ultraflat_openai/results/adaptive_depth7.json
+\`\`\`
+
+Local baseline (floating-point estimates):
+
+| Stage | Fourier modes retained | Approx. squared L2 energy | Accumulated analytic pruning error \(E_d\) |
+|---|---:|---:|---:|
+| 5, exactly computed then pruned | 5,994 | 0.43542 | 0.00023062 |
+| 6, FFT and prune | 85,696 | 0.48948 | 0.00096116 |
+| 7, FFT and prune | 1,865,022 | 0.53743 | 0.00242278 |
+| 8 | Not computed | — | dense 7D convolution would require 2,485,143,045 cells |
+
+The depth-7 convolution requires 30,371,265 dense cells and consumed
+approximately 2 GB PEAK RSS on the local machine. Keep the resource
+guards enabled. The adaptive stage-7 result is FAR below the paper's
+\(M_d\ge1-\delta\) requirement and does NOT yield a valid final \(F\)
+or any final sequence length \(N\).
+
+The exact-arithmetic propagation bound for truncation is
+\[
+E_{d+1}\le(2+E_d/2)E_d+\eta_{d+1},
+\]
+since the scalar recurrence difference factors as
+\[
+T_y(p)-T_y(q)
+=(p-q)[1-\tfrac12(p+q)\cos(2\pi y)].
+\]
+This is a valid analytical bound for the dropped Fourier \(\ell^1\)
+mass; **it does not include numerical FFT roundoff**. Hence the
+reported stage-7 \(E_7\simeq0.002423\) is NOT yet a formally certified
+numerical error bound. Interval FFT or verified arithmetic would be
+necessary before inserting this output into a rigorous
+Proposition 4.1 construction.
+
+### Low-J coefficient balancing algorithm
+
+Given positive/negative Fourier frequency pairs, find \(J+1\) real
+vectors \(\gamma,W_1,\ldots,W_J\) satisfying
+\[
+\prod_{j=0}^J|s\cdot W_j|\simeq\tau |b_s|^2,\qquad W_0=\gamma.
+\]
+For fixed vectors, \(\tau\) can be eliminated. With
+\(r_s=\sum_j\log|s\cdot W_j|-2\log|b_s|\), the optimal symmetric
+log-distortion is exactly
+\[
+\kappa=\tfrac12(\max_s r_s-\min_s r_s).
+\]
+The solver uses analytical Jacobians \(s_i/(s\cdot W_j)\), robust
+least-squares initialization, and a smooth-minimax polishing step.
+The solutions are **local numerical fits**, not global infeasibility
+proofs.
+
+\`\`\`bash
+python3 research/ultraflat_openai/lowrank_balance.py \
+  --depth 3 --directions 1 2 3 5 8 \
+  --restarts 5 --max-nfev 150 \
+  --output research/ultraflat_openai/results/lowrank_depth3.json
+\`\`\`
+
+The built-in exact \(d=2\) calibration uses
+\[
+Q(x,y)=x^3+\frac{49}{256}x^2y-\frac{2047}{512}xy^2-\frac{49}{64}y^3,
+\]
+which factorizes over \(\mathbb R\) and satisfies
+\(|Q(s)|=16|b_s|^2\) for all four \(p_2\) Fourier sign-pairs.
+Thus two spreading directions can algebraically balance this toy
+case whereas the original generic construction uses four directions.
+However, \(M_2=227/1024\ll1\); it is NOT an ultraflat auxiliary
+function by itself.
+
+### Actual finite-N signs as a SEPARATE comparator
+
+\`\`\`bash
+python3 research/ultraflat_openai/finite_n_search.py \
+  --lengths 32 64 128 --steps 10000 --restarts 2 \
+  --output research/ultraflat_openai/results/finite_n_comparator.json
+\`\`\`
+
+For sign sequence \(a_j\), define \(P_m=\sum_j a_j e^{2\pi ijm/M}\),
+\(q_m=|P_m|^2/N-1\). A sign flip at index \(j\) updates all grid
+values EXACTLY in the mathematical model by
+\[
+q'_m-q_m=\frac4N\Big(1-a_j\operatorname{Re}
+ (\overline P_m e^{2\pi ijm/M})\Big).
+\]
+The implementation anneals a smooth minimax *amplitude* objective;
+it is only a local heuristic and cannot prove asymptotic ultraflatness.
+For the trigonometric polynomial \(p(t)=|P(e^{it})|^2/N\), Bernstein's
+inequality gives a deterministic grid-to-circle implication: with
+grid values \(V=\min p\), \(U=\max p\),
+\[
+\alpha=\frac{\pi^2(N-1)^2}{2M^2}<1
+\quad\Rightarrow\quad
+\max p\le\frac U{1-\alpha},\quad
+\min p\ge V-\frac{\alpha U}{1-\alpha}.
+\]
+This statement is mathematically rigorous for exact grid values;
+float64 FFT extrema are *not* outward-rounded numerical certificates.
+No run of this heuristic is evidence that the OpenAI construction
+works at that \(N\); its outputs must be labeled independently.
+
+### Remaining engineering blockers
+
+- Dimension seven already has ~1.9m retained Fourier modes; a naive
+  next FFT would require >2.4 billion cells. Out-of-core, blocked
+  convolution or another compressed representation is necessary to
+  reach the original depth ~60.
+- A numerically good low-J fit must ALSO pass the full Proposition
+  4.1 norm and weight inequalities; a small least-squares loss alone
+  does not suffice.
+- Lemma 4.2 flat-chirp factor rounding, Section 5 signed interval
+  packing, wave joining/stationary phase, and Section 6 discrepancy
+  rounding have not yet been implemented. **The final N remains
+  unknown**, and the current code does not claim otherwise.

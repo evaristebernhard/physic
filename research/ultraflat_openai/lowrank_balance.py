@@ -18,7 +18,8 @@ from fractions import Fraction
 from pathlib import Path
 
 import numpy as np
-from scipy.optimize import least_squares
+from scipy.optimize import least_squares, minimize
+from scipy.special import logsumexp, softmax
 
 
 def original_fourier(depth):
@@ -98,6 +99,23 @@ def fit(depth, J, restarts, max_nfev, seed):
              jac=lambda z: residual_and_jac(z)[1],max_nfev=max_nfev,
              method="trf")
         W = solve.x.reshape(J+1,d)
+        # A least-squares fit need not minimize the worst-case log error.
+        # Polish the smooth half-range surrogate:
+        # (logsumexp(beta*r)+logsumexp(-beta*r))/(2*beta).
+        def smooth_minimax(z):
+            V=z.reshape(J+1,d)
+            dots=S@V.T
+            safe=np.where(abs(dots)>1e-10,dots,
+                          np.where(dots>=0,1e-10,-1e-10))
+            raw=np.log(abs(safe)).sum(axis=1)-target
+            beta=4.
+            weights=.5*(softmax(beta*raw)-softmax(-beta*raw))
+            grad=(weights[:,None,None]*(S[:,None,:]/safe[:,:,None])).sum(axis=0)
+            value=(logsumexp(beta*raw)+logsumexp(-beta*raw))/(2*beta)
+            return float(value),grad.ravel()
+        polished=minimize(smooth_minimax,W.ravel(),jac=True,method="L-BFGS-B",
+                          options={"maxiter":250})
+        W=polished.x.reshape(J+1,d)
         stats = balanced_error(S,target,W)
         if stats is None: continue
         kappa,rms,tau = stats

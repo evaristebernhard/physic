@@ -1,0 +1,390 @@
+# OpenAI ultraflat real Littlewood polynomials — original-method reproduction
+
+Isolated research module. The rest of the \`physic\` repository (atomic excess-charge paper) is unchanged.
+
+**Source:** OpenAI, *Ultraflat real Littlewood polynomials*, October 5, 2026, Sections 3–6: https://github.com/openai/math/tree/main/preprints/Ultraflat-real-Littlewood-polynomials-October-5-2026
+
+**Scope and scientific status.** This is the FIRST executable reproduction experiment, not a claim to reproduce the complete theorem. The Python code follows the **unchanged** Section 4 recurrence and constructs the same one-direction-per-sign-pair coefficients \(\gamma,W_j^{(0)},W_j^{(1)},\tau\). The rational Fourier coefficients and the relative errors of the Section 4 equation (4.5) are checked exactly. It additionally estimates the scale of \(T\) and the expanded support using clearly **non-certified** heuristic thresholds.
+
+**Not implemented:** numerical Lemma 4.2's chirp/discrepancy rounding, Proposition 5.1's signed interval packing, phase gluing and integration, and Section 6's sign rounding. **We have not measured any successful final sequence length \(N\), and no finite \(N_0(\varepsilon)\) has been established.** The audit intentionally stops rather than inventing an \(N\).
+
+## Reproduce
+
+No third-party Python dependencies:
+
+\`\`\`bash
+python3 -m unittest discover -s research/ultraflat_openai -v
+python3 research/ultraflat_openai/audit.py \
+  --depths 2 3 4 5 --delta 0.005 \
+  --max-directions 64 --max-terms 12000 \
+  --output research/ultraflat_openai/results/delta_0p005.json
+\`\`\`
+
+\`--max-directions\` and \`--max-terms\` are deliberate resource guards, not theoretical limitations. A stopped run is **not** a result about possible final \(N\).
+
+## Baseline measurements (Python 3, local execution)
+
+At the admissible internal parameter \(\delta=0.005 < 0.01\):
+
+| Original recursion depth | Support of \(p_d\) | \(D\), sign pairs | \(M_d\) | Outcome |
+|---|---:|---:|---:|---|
+| 2 | 8 | 4 | 0.2216796875 | Exact \(W,\tau\) checked; \(\log_{10} T\) proxy 13.54, \(\log_{10}|A|\) proxy 51.82 |
+| 3 | 54 | 27 | 0.3037941754 | Exact \(W,\tau\) checked; \(\log_{10} T\) proxy 42.30, \(\log_{10}|A|\) proxy 1132.74 |
+| 4 | 700 | 350 | 0.3740568532 | Stop: exceeds \(D=64\) resource guard |
+| 5 | — | — | — | Stop: Fourier expansion exceeds 12,000-term guard |
+
+For depths 2 and 3 the energy condition \(\|p_d\|_2^2\ge1-\delta=0.995\) **fails**, so their enormous expansion sizes are **toy-stage scale diagnostics**, not valid full instances of Proposition 4.1. The numbers for \(T\) and \(|A|\) are proxy estimates based on a box-count threshold and unit-constant rounding scale, **not** rigorous necessary or sufficient bounds for Lemma 4.2.
+
+## A rigorous obstruction for the unchanged Section 4 route
+
+For the original recursion,
+\[
+e_d:=1-\|p_d\|_2^2\ge(7/8)^d.
+\]
+Indeed
+\[
+M_{j+1}-M_j=\tfrac18\int(1-p_j^2)^2\le\tfrac18(1-M_j).
+\]
+Consequently, meeting the required \(M_d\ge1-\delta\) forces
+\[
+d\ge\frac{\log(1/\delta)}{\log(8/7)}.
+\]
+
+There is a persistent frequency \(e_1=(1,0,\ldots,0)\) with coefficient magnitude \(1/4\). There are also \(2^{d-1}\) frequencies
+\[
+s=(2^{d-1},\pm2^{d-2},\ldots,\pm1)
+\]
+of identical coefficient magnitude \(2^{-(2^{d+1}-2)}\). For **any** vector \(\gamma\) with \(\gamma_1\ne0\), at least one of these extreme frequencies has
+\[
+|s\cdot\gamma|\ge2^{d-1}|\gamma_1|.
+\]
+Put \(x_s=|b_s|^2/|s\cdot\gamma|\). This implies
+\[
+\frac{x_{e_1}}{x_{s_*}}\ge 2^{2^{d+2}+d-9}.
+\]
+For OpenAI's original equal-magnitude boxes, the coefficient-weight ratio \(1\le |c_a|/\sqrt{w_a}\le2\) implies (with common scale \(Q\))
+\[
+Qx_s/4\le n_s\le Qx_s,\qquad n_s\ge1.
+\]
+Hence **for this specific original construction**,
+\[
+\boxed{|A|\ge n_{e_1}\ge2^{2^{d+2}+d-11}.}
+\]
+At \(\delta=0.005\), the necessary depth is \(d\ge40\), and the lower bound on the intermediate support is
+\[
+\log_{10}|A|\ge 1.3239\times10^{12}.
+\]
+
+This is a **mathematical lower bound on the number of intermediate Fourier modes**, **NOT** a lower bound on final \(N\), and **NOT** an obstruction to modified/optimized algorithms satisfying the same Proposition 4.1.
+
+## Next faithful steps
+
+The next implementable stage is numerical Lemma 4.2: Fourier integrals of a smooth truncated quadratic chirp, complex-phase discrepancy rounding, and uniform numerical/certified errors. Only when this passes can one build the finite Fourier polynomial \(F\). The later signed interval packing and joined oscillatory function \(B_N\) are distinct stages. Measuring \(N\) can begin only when those stages produce a valid candidate \(B_N\) and real Fourier coefficients for Section 6.
+
+The principal research question is whether one can retain the **same Proposition 4.1 interface** while avoiding its original tensor-spreading support blowup. This module keeps the original benchmark intact for that comparison.
+
+
+## Second experiment: exact dyadic expansion and norm-preserving pruning (2026-10-10)
+
+The initial \`audit.py\` intentionally stops at a 12,000-term cap. The
+separate \`exact_pruning.py\` represents all coefficients as integer
+numerators with common denominator \(2^{q_d}\), where
+\[
+q_1=2,\qquad q_{d+1}=2q_d+2,\qquad q_d=2^{d+1}-2.
+\]
+This uses **the original paper's recursion exactly** but computes level 5
+without arbitrary-precision rational objects for each coefficient.
+
+Reproduce:
+\`\`\`bash
+python3 research/ultraflat_openai/exact_pruning.py \
+  --depths 2 3 4 5 6 --eta 0.005 \
+  --output research/ultraflat_openai/results/pruning_delta_0p005.json
+\`\`\`
+
+At \(\eta=0.005\), exact computations (not Monte Carlo):
+
+| d | Original terms | Pruned terms | Actual deleted Fourier \(\ell^1\) | \(M_d\) before | Energy after norm-one rescaling |
+|--:|--:|--:|--:|--:|--:|
+| 3 | 54 | 46 | 0.00048828125 | 0.303794175386 | 0.303497688763 |
+| 4 | 700 | 452 | 0.000233292580 | 0.374056853249 | 0.373882384318 |
+| 5 | 18,362 | 5,994 | 0.000230615190 | 0.435424475962 | 0.435223714387 |
+
+At d=6 the program deliberately stops before squaring 18,362 terms
+(\(>337\) million coefficient-pair operations). This resource ceiling is
+a computational guard, not a mathematical impossibility.
+
+### Norm-one pruning theorem; compatible with Proposition 4.1
+
+Let \(p(y)=\sum_{s\in S}b_s e(s\cdot y)\) be an original OpenAI auxiliary
+polynomial, \(R=|S|\), \(\|p\|_\infty\le1\). For \(\eta>0\), keep exactly the
+coefficients \(|b_s|\ge\eta/R\) and define
+\[
+\ell=\sum_{\text{deleted}}|b_s|\le\eta,\quad
+q(y)=\frac{\sum_{\text{kept}}b_se(s\cdot y)}{1+\ell}.
+\]
+Then
+\[
+\|q\|_\infty\le1,\qquad
+\|q\|_2^2
+=\frac{\|p\|_2^2-\sum_{\rm deleted}|b_s|^2}{(1+\ell)^2}
+\ge\frac{\|p\|_2^2-\eta^2/R}{(1+\eta)^2},
+\]
+and every nonzero retained coefficient has magnitude at least
+\(\eta/[R(1+\eta)]\). The nonzero mean and frequency-nonparallel properties
+of the original construction are unchanged, because only frequency
+deletion and positive scalar rescaling occur.
+
+**Useful corollary:** If \(0<\delta<1/100\), take an original \(p_d\) with
+\(M_d\ge1-\delta/2\) and choose \(\eta=\delta/8\). The rescaled \(q\)
+satisfies \(\|q\|_\infty\le1\), \(\|q\|_2^2\ge1-\delta\), and has a
+controlled positive smallest coefficient. Therefore the ORIGINAL
+equal-magnitude spreading proof of Proposition 4.1 can be applied to
+\(q\) (with its new coefficients) without changing its logical interface.
+This removes one severe coefficient-conditioning obstacle but does
+**not** remove the \(D\)-fold tensor spreading complexity.
+
+### Dependence on the weight vector gamma
+
+For a **fixed** \(\gamma\), the original spreading boxes obey
+\[
+n_s\in[Qx_s/4,Qx_s],\quad x_s=|b_s|^2/|s\cdot\gamma|,\quad n_s\ge1.
+\]
+Thus
+\[
+|A|\ge\frac{\max_s x_s}{4\min_s x_s}.
+\]
+This is a genuine lower bound **for that fixed gamma and original
+equal-box method**, not for an optimized gamma or for final \(N\).
+With the explicit signed-base integer \(\gamma\) used by the code, the
+\(\log_{10}\) lower bounds for \(|A|\) at \(d=5\) change from about
+**41.62 (raw)** to **17.38 (pruned)**. The reduction is substantial but
+even the pruned instance remains far beyond explicit final-wave
+computation and fails the \(\delta=0.005\) energy gate.
+
+## Third experiment: high-dimensional energy without Fourier expansion
+
+The paper's \(p_d(Y_1,\dots,Y_d)\) may be sampled by independently
+drawing \(U_j\) uniform on \([0,1)\) and updating
+\[
+x_j=x_{j-1}+\tfrac12(1-x_{j-1}^2)\cos(2\pi U_j).
+\]
+This directly samples \(1-M_d=\mathbb E(1-x_d^2)\). It does NOT generate
+the Fourier support or the final signs.
+
+\`\`\`bash
+python3 -m pip install numpy
+python3 research/ultraflat_openai/sample_energy.py \
+  --samples 1000000 --max-depth 90 --seed 20261010 \
+  --delta 0.005 --failure-probability 0.01 \
+  --output research/ultraflat_openai/results/energy_delta_0p005.json
+\`\`\`
+
+Observed deficits: at depth 58, 0.005205290; 59, 0.004775503;
+60, 0.004365253; 65, 0.002797559; 66, 0.002561365.
+The first **point estimate** below 0.005 is depth 59, not an exact
+certificate. Hoeffding's inequality and a union bound over all 90 depths,
+with the stated 1,000,000 samples, give a simultaneous radius
+\[
+\sqrt{\log(2\cdot90/0.01)/(2\cdot 10^6)}
+=0.002213383.
+\]
+Accordingly depth 66 is the first depth at which this **99%-confidence
+sampling bound** establishes deficit at most 0.005 (conditional on
+ideal i.i.d. uniform sampling and exact arithmetic). This is a
+probabilistic statement, not deterministic proof of the exact integral.
+
+**Main conclusion:** the original recurrence's needed depth is
+plausibly around 59 rather than the much larger conservative analytic
+upper bound. The actual bottleneck is explicitly materializing and
+spreading its enormous Fourier support. These experiments do not
+yield a value or rigorous numerical bound for final \(N_0(\varepsilon)\).
+
+
+## Fourth experiment: algorithm engineering while preserving OpenAI's interface
+
+The goal is to build a REAL executable method, not to replace the
+original ultraflat theorem by an unrelated asymptotic conjecture.
+There are three explicitly separated paths:
+
+1. **Faithful original recursion** (new \`fft_recursion.py\`,
+   \`adaptive_fft.py\`): compute the OpenAI \(p_d\) and compress
+   intermediate Fourier coefficients, with a tracked \(\ell^1\)-deletion
+   budget. This DOES use the original recursive function.
+2. **Low-rank spreading input** (\`lowrank_balance.py\`): fit a small
+   number \(J\) of quadratic-chirp directions to the equation used in
+   Proposition 4.1. The EXACT analytical \(d=2,J=2\) example verifies
+   the interface, but its energy is far below 1, and numerical \(d=3\)
+   fits are NOT certified feasible.
+3. **Independent finite-\(N\) comparator** (\`finite_n_search.py\`):
+   search actual binary sign sequences and check whole-circle
+   amplitude error. This is NOT the OpenAI proof. It provides an
+   independent baseline so that future Section 5/6 algorithms can be
+   compared with actual achieved lengths and numerical errors.
+
+### FFT original recursion
+
+Writing \(\widehat p_d(s)=b_s\), the unchanged recurrence gives
+\[
+\widehat p_{d+1}(u,\pm1)
+  =\tfrac14\left(\mathbf1_{u=0}-\sum_{s+t=u}b_sb_t\right).
+\]
+The large sum is a MULTIDIMENSIONAL convolution, accelerated by FFT.
+Unit tests cross-check against the exact rational recursion at depth
+\(3\to4\).
+
+Without earlier pruning, the exactly represented \(d=5\) polynomial
+has 18,362 Fourier entries. Computing its square requires
+18,362^2 \(\approx 337\) million naive ordered pairs, but the FFT
+convolution uses a dense array of only 1,640,925 cells. One local
+experiment recorded about 0.13 s for this FFT (not including
+preparing the depth-5 exact coefficients).
+
+**Adaptive experiment, with pruning applied at depth five first:**
+
+\`\`\`bash
+python3 research/ultraflat_openai/adaptive_fft.py \
+  --target-depth 9 --eta-start 0.005 \
+  --stage-budget 0.0005 --max-cells 35000000 \
+  --output research/ultraflat_openai/results/adaptive_depth7.json
+\`\`\`
+
+Local baseline (floating-point estimates):
+
+| Stage | Fourier modes retained | Approx. squared L2 energy | Accumulated analytic pruning error \(E_d\) |
+|---|---:|---:|---:|
+| 5, exactly computed then pruned | 5,994 | 0.43542 | 0.00023062 |
+| 6, FFT and prune | 85,696 | 0.48948 | 0.00096116 |
+| 7, FFT and prune | 1,865,022 | 0.53743 | 0.00242278 |
+| 8 | Not computed | — | dense 7D convolution would require 2,485,143,045 cells |
+
+The depth-7 convolution requires 30,371,265 dense cells and consumed
+approximately 2 GB PEAK RSS on the local machine. Keep the resource
+guards enabled. The adaptive stage-7 result is FAR below the paper's
+\(M_d\ge1-\delta\) requirement and does NOT yield a valid final \(F\)
+or any final sequence length \(N\).
+
+The exact-arithmetic propagation bound for truncation is
+\[
+E_{d+1}\le(2+E_d/2)E_d+\eta_{d+1},
+\]
+since the scalar recurrence difference factors as
+\[
+T_y(p)-T_y(q)
+=(p-q)[1-\tfrac12(p+q)\cos(2\pi y)].
+\]
+This is a valid analytical bound for the dropped Fourier \(\ell^1\)
+mass; **it does not include numerical FFT roundoff**. Hence the
+reported stage-7 \(E_7\simeq0.002423\) is NOT yet a formally certified
+numerical error bound. Interval FFT or verified arithmetic would be
+necessary before inserting this output into a rigorous
+Proposition 4.1 construction.
+
+### Low-J coefficient balancing algorithm
+
+Given positive/negative Fourier frequency pairs, find \(J+1\) real
+vectors \(\gamma,W_1,\ldots,W_J\) satisfying
+\[
+\prod_{j=0}^J|s\cdot W_j|\simeq\tau |b_s|^2,\qquad W_0=\gamma.
+\]
+For fixed vectors, \(\tau\) can be eliminated. With
+\(r_s=\sum_j\log|s\cdot W_j|-2\log|b_s|\), the optimal symmetric
+log-distortion is exactly
+\[
+\kappa=\tfrac12(\max_s r_s-\min_s r_s).
+\]
+The solver uses analytical Jacobians \(s_i/(s\cdot W_j)\), robust
+least-squares initialization, and a smooth-minimax polishing step.
+The solutions are **local numerical fits**, not global infeasibility
+proofs.
+
+\`\`\`bash
+python3 research/ultraflat_openai/lowrank_balance.py \
+  --depth 3 --directions 1 2 3 5 8 \
+  --restarts 5 --max-nfev 150 \
+  --output research/ultraflat_openai/results/lowrank_depth3.json
+\`\`\`
+
+The built-in exact \(d=2\) calibration uses
+\[
+Q(x,y)=x^3+\frac{49}{256}x^2y-\frac{2047}{512}xy^2-\frac{49}{64}y^3,
+\]
+which factorizes over \(\mathbb R\) and satisfies
+\(|Q(s)|=16|b_s|^2\) for all four \(p_2\) Fourier sign-pairs.
+Thus two spreading directions can algebraically balance this toy
+case whereas the original generic construction uses four directions.
+However, \(M_2=227/1024\ll1\); it is NOT an ultraflat auxiliary
+function by itself.
+
+### Actual finite-N signs as a SEPARATE comparator
+
+\`\`\`bash
+python3 research/ultraflat_openai/finite_n_search.py \
+  --lengths 32 64 128 --steps 10000 --restarts 2 \
+  --output research/ultraflat_openai/results/finite_n_comparator.json
+\`\`\`
+
+For sign sequence \(a_j\), define \(P_m=\sum_j a_j e^{2\pi ijm/M}\),
+\(q_m=|P_m|^2/N-1\). A sign flip at index \(j\) updates all grid
+values EXACTLY in the mathematical model by
+\[
+q'_m-q_m=\frac4N\Big(1-a_j\operatorname{Re}
+ (\overline P_m e^{2\pi ijm/M})\Big).
+\]
+The implementation anneals a smooth minimax *amplitude* objective;
+it is only a local heuristic and cannot prove asymptotic ultraflatness.
+For the trigonometric polynomial \(p(t)=|P(e^{it})|^2/N\), Bernstein's
+inequality gives a deterministic grid-to-circle implication: with
+grid values \(V=\min p\), \(U=\max p\),
+\[
+\alpha=\frac{\pi^2(N-1)^2}{2M^2}<1
+\quad\Rightarrow\quad
+\max p\le\frac U{1-\alpha},\quad
+\min p\ge V-\frac{\alpha U}{1-\alpha}.
+\]
+This statement is mathematically rigorous for exact grid values;
+float64 FFT extrema are *not* outward-rounded numerical certificates.
+No run of this heuristic is evidence that the OpenAI construction
+works at that \(N\); its outputs must be labeled independently.
+
+### Remaining engineering blockers
+
+- Dimension seven already has ~1.9m retained Fourier modes; a naive
+  next FFT would require >2.4 billion cells. Out-of-core, blocked
+  convolution or another compressed representation is necessary to
+  reach the original depth ~60.
+- A numerically good low-J fit must ALSO pass the full Proposition
+  4.1 norm and weight inequalities; a small least-squares loss alone
+  does not suffice.
+- Lemma 4.2 flat-chirp factor rounding, Section 5 signed interval
+  packing, wave joining/stationary phase, and Section 6 discrepancy
+  rounding have not yet been implemented. **The final N remains
+  unknown**, and the current code does not claim otherwise.
+
+
+### Negative depth-eight test: simple box clipping is not a valid shortcut
+
+After computing the depth-seven 1,865,022-term truncated polynomial,
+restricting its Fourier support to smaller rectangular boxes would
+make the next dense FFT manageable, but fails the essential
+small-deletion-\(\ell^1\) requirement:
+
+| Maximum absolute frequency by coordinate | Next FFT cells | Fourier L1 mass discarded (float) |
+|---|---:|---:|
+| (6,6,5,4,2,1,1) | 50,203,125 | 1.14116 |
+| (6,6,4,4,2,1,1) | 40,640,625 | 1.17079 |
+| (5,5,4,4,2,1,1) | 28,676,025 | 1.22191 |
+| (8,8,6,5,3,1,1) | 185,810,625 | 0.94341 |
+
+Dropping even 0.94 of Fourier coefficient L1 mass is incompatible
+with the present \(10^{-3}\)-scale uniform-error budget. Thus blindly
+shrinking the frequency bounding box is not a sound depth-eight fix.
+See \`results/adaptive_fft_local_20261010.json\` for the local
+diagnostic record.
+
+The mathematical next task is not another heuristic frequency cutoff.
+It is to implement an out-of-core/blocked convolution that never needs
+to instantiate all \(\sim 2.5\) billion dense output cells, while
+retaining a certified bound on the mass actually omitted. A tensor-
+network representation may also be considered, but only if an
+\(L^\infty\) / \(\ell^1\)-level error certificate can be produced.

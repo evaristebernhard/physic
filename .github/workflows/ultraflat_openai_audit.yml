@@ -1,0 +1,67 @@
+name: OpenAI ultraflat Section 4 audit
+
+on:
+  push:
+    branches: [research/openai-ultraflat-reproduction]
+  pull_request:
+    paths:
+      - 'research/ultraflat_openai/**'
+      - '.github/workflows/ultraflat_openai_audit.yml'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Monte Carlo dependency
+        run: python -m pip install numpy scipy
+      - name: Unit tests for exact arithmetic
+        run: python -m unittest discover -s research/ultraflat_openai -v
+      - name: Reproduce conservative scale audit
+        run: |
+          python research/ultraflat_openai/audit.py \
+            --depths 2 3 4 5 --delta 0.005 \
+            --max-directions 64 --max-terms 12000 \
+            --output research/ultraflat_openai/results/delta_0p005.json
+      - name: Exact dyadic pruning benchmark
+        run: |
+          python research/ultraflat_openai/exact_pruning.py \
+            --depths 2 3 4 5 6 --eta 0.005 \
+            --output research/ultraflat_openai/results/pruning_delta_0p005.json
+      - name: Sample original recursion energy with confidence radius
+        run: |
+          python research/ultraflat_openai/sample_energy.py \
+            --samples 1000000 --max-depth 90 --seed 20261010 \
+            --delta 0.005 --failure-probability 0.01 \
+            --output research/ultraflat_openai/results/energy_delta_0p005.json
+      - name: Test original Proposition 4.1 lower-dimensional balancing
+        run: |
+          python research/ultraflat_openai/lowrank_balance.py \
+            --depth 3 --directions 1 2 3 5 8 \
+            --restarts 5 --max-nfev 150 \
+            --output research/ultraflat_openai/results/lowrank_depth3.json
+      - name: Numerical finite-N comparator (not original proof)
+        run: |
+          python research/ultraflat_openai/finite_n_search.py \
+            --lengths 32 64 128 --steps 10000 --restarts 2 \
+            --output research/ultraflat_openai/results/finite_n_comparator.json
+      - name: Accelerated original recurrence depth 5 to 6
+        run: |
+          python research/ultraflat_openai/fft_recursion.py \
+            --parent-depth 5 --budgets 0.0001 0.0005 0.001 0.005 \
+            --output research/ultraflat_openai/results/fft_depth6.json
+      - name: Adaptive FFT original recursion through depth seven
+        run: |
+          python research/ultraflat_openai/adaptive_fft.py \
+            --target-depth 9 --eta-start 0.005 \
+            --stage-budget 0.0005 --max-cells 35000000 \
+            --output research/ultraflat_openai/results/adaptive_depth7.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: openai-ultraflat-section4-audit
+          path: research/ultraflat_openai/results/*.json

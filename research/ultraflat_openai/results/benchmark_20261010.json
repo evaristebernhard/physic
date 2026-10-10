@@ -1,0 +1,96 @@
+{
+  "experiment_date": "2026-10-10",
+  "repository": "evaristebernhard/physic",
+  "branch": "research/openai-ultraflat-reproduction",
+  "original_paper": "OpenAI Ultraflat real Littlewood polynomials (2026-10-05)",
+  "scope": "Section 4 exact original recurrence and compatible pruning; independent MC sampling",
+  "requested_final_N": "UNRESOLVED, not computed",
+  "eta": 0.005,
+  "delta": 0.005,
+  "exact": [
+    {
+      "d": 3,
+      "dyadic_denominator_log2": 14,
+      "raw_support": 54,
+      "pruned_support": 46,
+      "original_energy": 0.30379417538642883,
+      "deleted_L1": 0.00048828125,
+      "norm_one_pruned_energy": 0.3034976887629362
+    },
+    {
+      "d": 4,
+      "dyadic_denominator_log2": 30,
+      "raw_support": 700,
+      "pruned_support": 452,
+      "original_energy": 0.3740568532492054,
+      "deleted_L1": 0.0002332925796508789,
+      "norm_one_pruned_energy": 0.37388238431830795
+    },
+    {
+      "d": 5,
+      "dyadic_denominator_log2": 62,
+      "raw_support": 18362,
+      "pruned_support": 5994,
+      "original_energy": 0.4354244759621249,
+      "deleted_L1": 0.00023061518951209004,
+      "norm_one_pruned_energy": 0.43522371438668794
+    }
+  ],
+  "fixed_gamma_original_equal_box_lower_bound_log10": {
+    "d3": {
+      "raw": 8.635497129312757,
+      "pruned": 7.950018838993916
+    },
+    "d4": {
+      "raw": 20.00124098716192,
+      "pruned": 12.136944528432307
+    },
+    "d5": {
+      "raw": 41.62274713879342,
+      "pruned": 17.38358956100748
+    }
+  },
+  "monte_carlo": {
+    "samples": 1000000,
+    "seed": 20261010,
+    "max_depth": 90,
+    "failure_probability": 0.01,
+    "simultaneous_hoeffding_radius": 0.0022133828223872957,
+    "estimated_first_depth_meeting_delta": 59,
+    "first_depth_meeting_delta_with_probability_at_least_99pct_under_ideal_sampling": 66,
+    "checkpoints": [
+      {
+        "d": 58,
+        "mean_deficit": 0.00520529
+      },
+      {
+        "d": 59,
+        "mean_deficit": 0.004775503
+      },
+      {
+        "d": 60,
+        "mean_deficit": 0.004365253
+      },
+      {
+        "d": 65,
+        "mean_deficit": 0.002797559
+      },
+      {
+        "d": 66,
+        "mean_deficit": 0.002561365
+      },
+      {
+        "d": 70,
+        "mean_deficit": 0.001809331
+      }
+    ],
+    "limitation": "Hoeffding statement applies to ideal independent uniform samples and exact arithmetic; numpy floating point not interval certified"
+  },
+  "scope_notes": [
+    "No full Lemma 4.2 equal-modulus chirp rounding",
+    "No Section 5 hypergraph packing or circle waves",
+    "No Section 6 sign rounding",
+    "No final N or N0 established",
+    "These levels d<=5 do not satisfy M_d>=0.995"
+  ]
+}

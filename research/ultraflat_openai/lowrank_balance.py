@@ -45,7 +45,7 @@ def original_fourier(depth):
 
 def balanced_error(S, target, vectors):
     v = S @ vectors.T
-    if min(abs(v.flat))<1e-12:
+    if np.min(np.abs(v))<1e-12:
         return None
     r = np.log(abs(v)).sum(axis=1)-target
     return (float((r.max()-r.min())/2),

@@ -54,8 +54,8 @@ def prune(poly, exponent, eta):
     cutoff=bound*(1<<exponent)
     kept={s:b for s,b in poly.items() if abs(b)>=cutoff}
     deleted={s:b for s,b in poly.items() if abs(b)<cutoff}
-    lost_l1=Fraction(sum(abs(b) for b in deleted),1<<exponent)
-    lost_l2=Fraction(sum(b*b for b in deleted),1<<(2*exponent))
+    lost_l1=Fraction(sum(abs(b) for b in deleted.values()),1<<exponent)
+    lost_l2=Fraction(sum(b*b for b in deleted.values()),1<<(2*exponent))
     normalization=1+lost_l1
     assert lost_l1<=eta
     assert lost_l2<=eta*eta/R

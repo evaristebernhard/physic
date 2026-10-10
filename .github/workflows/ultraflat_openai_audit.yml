@@ -50,6 +50,11 @@ jobs:
           python research/ultraflat_openai/finite_n_search.py \
             --lengths 32 64 128 --steps 10000 --restarts 2 \
             --output research/ultraflat_openai/results/finite_n_comparator.json
+      - name: Accelerated original recurrence depth 5 to 6
+        run: |
+          python research/ultraflat_openai/fft_recursion.py \
+            --parent-depth 5 --budgets 0.0001 0.0005 0.001 0.005 \
+            --output research/ultraflat_openai/results/fft_depth6.json
       - uses: actions/upload-artifact@v4
         with:
           name: openai-ultraflat-section4-audit

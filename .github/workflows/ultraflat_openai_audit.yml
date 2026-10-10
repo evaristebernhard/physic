@@ -18,6 +18,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Install Monte Carlo dependency
+        run: python -m pip install numpy
       - name: Unit tests for exact arithmetic
         run: python -m unittest discover -s research/ultraflat_openai -v
       - name: Reproduce conservative scale audit
@@ -26,7 +28,18 @@ jobs:
             --depths 2 3 4 5 --delta 0.005 \
             --max-directions 64 --max-terms 12000 \
             --output research/ultraflat_openai/results/delta_0p005.json
+      - name: Exact dyadic pruning benchmark
+        run: |
+          python research/ultraflat_openai/exact_pruning.py \
+            --depths 2 3 4 5 6 --eta 0.005 \
+            --output research/ultraflat_openai/results/pruning_delta_0p005.json
+      - name: Sample original recursion energy with confidence radius
+        run: |
+          python research/ultraflat_openai/sample_energy.py \
+            --samples 1000000 --max-depth 90 --seed 20261010 \
+            --delta 0.005 --failure-probability 0.01 \
+            --output research/ultraflat_openai/results/energy_delta_0p005.json
       - uses: actions/upload-artifact@v4
         with:
           name: openai-ultraflat-section4-audit
-          path: research/ultraflat_openai/results/delta_0p005.json
+          path: research/ultraflat_openai/results/*.json

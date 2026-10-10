@@ -1,0 +1,112 @@
+{
+  "run_date": "2026-10-10",
+  "experiment": "OpenAI original p_d recursion with adaptive FFT convolution and coefficient L1 pruning",
+  "branch": "research/openai-ultraflat-reproduction",
+  "precision": "float64 FFT after exact rational depth-5 source; numerical roundoff NOT rigorously enclosed",
+  "pruning_error_bound": "E_next <= (2+E/2)*E + eta_next; does not include float FFT error",
+  "stages": [
+    {
+      "depth": 5,
+      "exact_input_support": 18362,
+      "retained_support": 5994,
+      "energy_approx": 0.4354244759621249,
+      "deleted_L1": 0.00023061518951209004,
+      "analytical_pruning_error": 0.00023061518951209004
+    },
+    {
+      "depth": 6,
+      "fft_cells": 631125,
+      "fft_seconds_approx": 0.0927,
+      "retained_support": 85696,
+      "energy_approx": 0.48947954926768206,
+      "deleted_L1": 0.0004999034130836698,
+      "analytical_pruning_error": 0.0009611603837906666,
+      "coordinate_maxima": [
+        9,
+        9,
+        7,
+        4,
+        2,
+        1
+      ]
+    },
+    {
+      "depth": 7,
+      "fft_cells": 30371265,
+      "fft_seconds_including_sort_approx": 5.3461,
+      "retained_support": 1865022,
+      "energy_approx": 0.5374253301040242,
+      "deleted_L1": 0.0004999971725343864,
+      "analytical_pruning_error": 0.002422779854757404,
+      "coordinate_maxima": [
+        12,
+        12,
+        10,
+        8,
+        4,
+        2,
+        1
+      ]
+    },
+    {
+      "depth": 8,
+      "status": "FFT_CELL_BUDGET",
+      "required_dense_cells": 2485143045
+    }
+  ],
+  "depth7_candidate_rectangular_restrictions": [
+    {
+      "maxima": [
+        6,
+        6,
+        5,
+        4,
+        2,
+        1,
+        1
+      ],
+      "next_fft_cells": 50203125,
+      "discarded_L1_approx": 1.1411583052668686
+    },
+    {
+      "maxima": [
+        6,
+        6,
+        4,
+        4,
+        2,
+        1,
+        1
+      ],
+      "next_fft_cells": 40640625,
+      "discarded_L1_approx": 1.170785661518556
+    },
+    {
+      "maxima": [
+        5,
+        5,
+        4,
+        4,
+        2,
+        1,
+        1
+      ],
+      "next_fft_cells": 28676025,
+      "discarded_L1_approx": 1.221910018308387
+    },
+    {
+      "maxima": [
+        8,
+        8,
+        6,
+        5,
+        3,
+        1,
+        1
+      ],
+      "next_fft_cells": 185810625,
+      "discarded_L1_approx": 0.9434080811860917
+    }
+  ],
+  "qualification": "L1 deletion of >0.9 from naive coordinate-box crop destroys the small-error guarantee. Streaming/block FFT or compact tensor formats still needed. No Proposition 4.1 nor final N constructed."
+}

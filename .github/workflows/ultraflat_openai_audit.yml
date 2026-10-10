@@ -1,0 +1,32 @@
+name: OpenAI ultraflat Section 4 audit
+
+on:
+  push:
+    branches: [research/openai-ultraflat-reproduction]
+  pull_request:
+    paths:
+      - 'research/ultraflat_openai/**'
+      - '.github/workflows/ultraflat_openai_audit.yml'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Unit tests for exact arithmetic
+        run: python -m unittest discover -s research/ultraflat_openai -v
+      - name: Reproduce conservative scale audit
+        run: |
+          python research/ultraflat_openai/audit.py \
+            --depths 2 3 4 5 --delta 0.005 \
+            --max-directions 64 --max-terms 12000 \
+            --output research/ultraflat_openai/results/delta_0p005.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: openai-ultraflat-section4-audit
+          path: research/ultraflat_openai/results/delta_0p005.json
